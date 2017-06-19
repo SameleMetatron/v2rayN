@@ -11,37 +11,31 @@
 ## 分享链接格式说明
 分享的链接（二维码）格式：vmess://(Base64编码的json格式服务器数据
 
-json数据如下
-
-{
-
-    "ps": "备注别名",
-    "add": "111.111.111.111",
-    "port": "32000",
-    "id": "1386f85e-657b-4d6e-9d56-78badb75e1fd",
-    "aid": "100",
-    "net": "tcp",
-    "type": "none",
-    "host": "www.bbb.com",
-    "tls": "tls"
-}
-net ：传输协议（tcp\kcp\ws)
-
-type:伪装类型（none\http\srtp\utp\wechat-video）
-
-host：伪装的域名
-
+json数据如下  
+{  
+    "ps": "备注别名",  
+    "add": "111.111.111.111",  
+    "port": "32000",  
+    "id": "1386f85e-657b-4d6e-9d56-78badb75e1fd",  
+    "aid": "100",  
+    "net": "tcp",  
+    "type": "none",  
+    "host": "www.bbb.com",  
+    "tls": "tls"  
+}  
+  
+net ：传输协议（tcp\kcp\ws)  
+type:伪装类型（none\http\srtp\utp\wechat-video）  
+host：伪装的域名  
 tls：底层传输安全（tls\)
 
 ------------
 
-
-
-v2ray core下载地址
+v2ray core下载地址  
 https://github.com/v2ray/v2ray-core/releases
 
-project v2ray详情 
+project v2ray详情   
 https://github.com/v2ray/v2ray-core
 
-用户手册
+用户手册  
 https://www.v2ray.com/
