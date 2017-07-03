@@ -581,5 +581,45 @@ namespace v2rayN.Forms
 
         #endregion
 
+        #region 移动服务器
+
+        private void menuMoveTop_Click(object sender, EventArgs e)
+        {
+            MoveServer(EMove.Top);
+        }
+
+        private void menuMoveUp_Click(object sender, EventArgs e)
+        {
+            MoveServer(EMove.Up);
+        }
+
+        private void menuMoveDown_Click(object sender, EventArgs e)
+        {
+            MoveServer(EMove.Down);
+        }
+
+        private void menuMoveBottom_Click(object sender, EventArgs e)
+        {
+            MoveServer(EMove.Bottom);
+        }
+
+        private void MoveServer(EMove eMove)
+        {
+            int index = GetLvSelectedIndex();
+            if (index < 0)
+            {
+                UI.Show("请先选择服务器");
+                return;
+            }
+            if (ConfigHandler.MoveServer(ref config, index, eMove) == 0)
+            {
+                //刷新
+                RefreshServers();
+                LoadV2ray();
+            }
+        }
+
+        #endregion
+
     }
 }

@@ -86,6 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mode\EMove.cs" />
     <Compile Include="Tool\CDateTime.cs" />
     <Compile Include="Forms\AddServerForm.cs">
       <SubType>Form</SubType>

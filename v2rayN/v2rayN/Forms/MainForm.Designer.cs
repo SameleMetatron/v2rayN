@@ -48,6 +48,11 @@
             this.menuCopyServer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSetDefaultServer = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuMoveTop = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuMoveUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuMoveDown = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuMoveBottom = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.menuPingServer = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.menuExport2ClientConfig = new System.Windows.Forms.ToolStripMenuItem();
@@ -163,6 +168,11 @@
             this.menuCopyServer,
             this.menuSetDefaultServer,
             this.toolStripSeparator3,
+            this.menuMoveTop,
+            this.menuMoveUp,
+            this.menuMoveDown,
+            this.menuMoveBottom,
+            this.toolStripSeparator9,
             this.menuPingServer,
             this.toolStripSeparator6,
             this.menuExport2ClientConfig,
@@ -170,7 +180,7 @@
             this.menuShareQRCode});
             this.cmsLv.Name = "cmsLv";
             this.cmsLv.OwnerItem = this.tsbServer;
-            this.cmsLv.Size = new System.Drawing.Size(227, 192);
+            this.cmsLv.Size = new System.Drawing.Size(227, 286);
             // 
             // menuAddServer
             // 
@@ -204,6 +214,39 @@
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(223, 6);
+            // 
+            // menuMoveTop
+            // 
+            this.menuMoveTop.Name = "menuMoveTop";
+            this.menuMoveTop.Size = new System.Drawing.Size(226, 22);
+            this.menuMoveTop.Text = "上移至顶";
+            this.menuMoveTop.Click += new System.EventHandler(this.menuMoveTop_Click);
+            // 
+            // menuMoveUp
+            // 
+            this.menuMoveUp.Name = "menuMoveUp";
+            this.menuMoveUp.Size = new System.Drawing.Size(226, 22);
+            this.menuMoveUp.Text = "上移";
+            this.menuMoveUp.Click += new System.EventHandler(this.menuMoveUp_Click);
+            // 
+            // menuMoveDown
+            // 
+            this.menuMoveDown.Name = "menuMoveDown";
+            this.menuMoveDown.Size = new System.Drawing.Size(226, 22);
+            this.menuMoveDown.Text = "下移";
+            this.menuMoveDown.Click += new System.EventHandler(this.menuMoveDown_Click);
+            // 
+            // menuMoveBottom
+            // 
+            this.menuMoveBottom.Name = "menuMoveBottom";
+            this.menuMoveBottom.Size = new System.Drawing.Size(226, 22);
+            this.menuMoveBottom.Text = "下移至底";
+            this.menuMoveBottom.Click += new System.EventHandler(this.menuMoveBottom_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(223, 6);
             // 
             // menuPingServer
             // 
@@ -251,10 +294,10 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.txtMsgBox);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 341);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox2.Location = new System.Drawing.Point(0, 451);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(893, 286);
+            this.groupBox2.Size = new System.Drawing.Size(893, 176);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "信息";
@@ -272,17 +315,17 @@
             this.txtMsgBox.Name = "txtMsgBox";
             this.txtMsgBox.ReadOnly = true;
             this.txtMsgBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMsgBox.Size = new System.Drawing.Size(887, 266);
+            this.txtMsgBox.Size = new System.Drawing.Size(887, 156);
             this.txtMsgBox.TabIndex = 2;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.lvServers);
             this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 61);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(893, 280);
+            this.groupBox1.Size = new System.Drawing.Size(893, 390);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "服务器列表";
@@ -299,7 +342,7 @@
             this.lvServers.Location = new System.Drawing.Point(3, 17);
             this.lvServers.Name = "lvServers";
             this.lvServers.ShowGroups = false;
-            this.lvServers.Size = new System.Drawing.Size(887, 260);
+            this.lvServers.Size = new System.Drawing.Size(887, 370);
             this.lvServers.TabIndex = 1;
             this.lvServers.UseCompatibleStateImageBehavior = false;
             this.lvServers.View = System.Windows.Forms.View.Details;
@@ -312,7 +355,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 17);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(887, 260);
+            this.dataGridView1.Size = new System.Drawing.Size(887, 370);
             this.dataGridView1.TabIndex = 0;
             // 
             // panel1
@@ -390,8 +433,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(893, 627);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tsMain);
             this.MaximizeBox = true;
@@ -453,6 +496,11 @@
         private System.Windows.Forms.ToolStripMenuItem menuAbout;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem menuShareQRCode;
+        private System.Windows.Forms.ToolStripMenuItem menuMoveTop;
+        private System.Windows.Forms.ToolStripMenuItem menuMoveUp;
+        private System.Windows.Forms.ToolStripMenuItem menuMoveDown;
+        private System.Windows.Forms.ToolStripMenuItem menuMoveBottom;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
     }
 }
 

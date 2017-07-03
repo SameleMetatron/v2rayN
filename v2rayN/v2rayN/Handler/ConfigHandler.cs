@@ -268,5 +268,115 @@ namespace v2rayN.Handler
             }
         }
 
+        /// <summary>
+        /// 移动服务器
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="index"></param>
+        /// <param name="eMove"></param>
+        /// <returns></returns>
+        public static int MoveServer(ref Config config, int index, EMove eMove)
+        {
+            int count = config.vmess.Count;
+            if (index < 0 || index > config.vmess.Count - 1)
+            {
+                return -1;
+            }
+            switch (eMove)
+            {
+                case EMove.Top:
+                    {
+                        if (index == 0)
+                        {
+                            return 0;
+                        }
+                        VmessItem vmess = Utils.DeepCopy<VmessItem>(config.vmess[index]);
+                        config.vmess.RemoveAt(index);
+                        config.vmess.Insert(0, vmess);
+                        if (index < config.index)
+                        {
+                            //
+                        }
+                        else if (config.index == index)
+                        {
+                            config.index = 0;
+                        }
+                        else
+                        {
+                            config.index++;
+                        }
+                        break;
+                    }
+                case EMove.Up:
+                    {
+                        if (index == 0)
+                        {
+                            return 0;
+                        }
+                        VmessItem vmess = Utils.DeepCopy<VmessItem>(config.vmess[index]);
+                        config.vmess.RemoveAt(index);
+                        config.vmess.Insert(index - 1, vmess);
+                        if (index == config.index + 1)
+                        {
+                            config.index++;
+                        }
+                        else if (config.index == index)
+                        {
+                            config.index--;
+                        }
+                        break;
+                    }
+
+                case EMove.Down:
+                    {
+                        if (index == count - 1)
+                        {
+                            return 0;
+                        }
+                        VmessItem vmess = Utils.DeepCopy<VmessItem>(config.vmess[index]);
+                        config.vmess.RemoveAt(index);
+                        config.vmess.Insert(index + 1, vmess);
+                        if (index == config.index - 1)
+                        {
+                            config.index--;
+                        }
+                        else if (config.index == index)
+                        {
+                            config.index++;
+                        }
+                        break;
+                    }
+                case EMove.Bottom:
+                    {
+                        if (index == count - 1)
+                        {
+                            return 0;
+                        }
+                        VmessItem vmess = Utils.DeepCopy<VmessItem>(config.vmess[index]);
+                        config.vmess.RemoveAt(index);
+                        config.vmess.Add(vmess);
+                        if (index < config.index)
+                        {
+                            config.index--;
+                        }
+                        else if (config.index == index)
+                        {
+                            config.index = count - 1;
+                        }
+                        else
+                        {
+                            //
+                        }
+                        break;
+                    }
+
+            }
+            Global.reloadV2ray = true;
+
+            ToJsonFile(config);
+
+            return 0;
+        }
+
     }
 }

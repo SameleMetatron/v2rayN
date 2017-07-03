@@ -30,6 +30,7 @@
         {
             this.btnClose = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnGUID = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -57,14 +58,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnOK = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.menuServer = new System.Windows.Forms.MenuStrip();
             this.MenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemImportClient = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemImportServer = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuItemImportClipboard = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnGUID = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -106,10 +108,20 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 34);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(515, 359);
+            this.groupBox1.Size = new System.Drawing.Size(606, 387);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "服务器";
+            // 
+            // btnGUID
+            // 
+            this.btnGUID.Location = new System.Drawing.Point(411, 83);
+            this.btnGUID.Name = "btnGUID";
+            this.btnGUID.Size = new System.Drawing.Size(75, 23);
+            this.btnGUID.TabIndex = 23;
+            this.btnGUID.Text = "生成(&G)";
+            this.btnGUID.UseVisualStyleBackColor = true;
+            this.btnGUID.Click += new System.EventHandler(this.btnGUID_Click);
             // 
             // label13
             // 
@@ -122,6 +134,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.cmbStreamSecurity);
             this.groupBox2.Controls.Add(this.label12);
@@ -130,9 +144,9 @@
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.cmbHeaderType);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(3, 236);
+            this.groupBox2.Location = new System.Drawing.Point(3, 238);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(509, 120);
+            this.groupBox2.Size = new System.Drawing.Size(600, 146);
             this.groupBox2.TabIndex = 21;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "不清楚则保持默认值";
@@ -140,7 +154,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(9, 92);
+            this.label15.Location = new System.Drawing.Point(9, 115);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(77, 12);
             this.label15.TabIndex = 22;
@@ -153,7 +167,7 @@
             this.cmbStreamSecurity.Items.AddRange(new object[] {
             "",
             "tls"});
-            this.cmbStreamSecurity.Location = new System.Drawing.Point(124, 88);
+            this.cmbStreamSecurity.Location = new System.Drawing.Point(124, 111);
             this.cmbStreamSecurity.Name = "cmbStreamSecurity";
             this.cmbStreamSecurity.Size = new System.Drawing.Size(143, 20);
             this.cmbStreamSecurity.TabIndex = 21;
@@ -170,8 +184,9 @@
             // txtRequestHost
             // 
             this.txtRequestHost.Location = new System.Drawing.Point(124, 58);
+            this.txtRequestHost.Multiline = true;
             this.txtRequestHost.Name = "txtRequestHost";
-            this.txtRequestHost.Size = new System.Drawing.Size(359, 21);
+            this.txtRequestHost.Size = new System.Drawing.Size(301, 44);
             this.txtRequestHost.TabIndex = 16;
             // 
             // label11
@@ -188,9 +203,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(9, 62);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(107, 12);
+            this.label10.Size = new System.Drawing.Size(95, 12);
             this.label10.TabIndex = 17;
-            this.label10.Text = "Tcp伪装域名(host)";
+            this.label10.Text = "伪装域名/其他项";
             // 
             // cmbHeaderType
             // 
@@ -356,9 +371,9 @@
             this.panel2.Controls.Add(this.btnClose);
             this.panel2.Controls.Add(this.btnOK);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 393);
+            this.panel2.Location = new System.Drawing.Point(0, 421);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(515, 60);
+            this.panel2.Size = new System.Drawing.Size(606, 60);
             this.panel2.TabIndex = 7;
             // 
             // btnOK
@@ -371,13 +386,21 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 24);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(606, 10);
+            this.panel1.TabIndex = 6;
+            // 
             // menuServer
             // 
             this.menuServer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuItem1});
             this.menuServer.Location = new System.Drawing.Point(0, 0);
             this.menuServer.Name = "menuServer";
-            this.menuServer.Size = new System.Drawing.Size(515, 24);
+            this.menuServer.Size = new System.Drawing.Size(606, 24);
             this.menuServer.TabIndex = 8;
             // 
             // MenuItem1
@@ -417,30 +440,30 @@
             this.MenuItemImportClipboard.Text = "从剪贴板导入URL";
             this.MenuItemImportClipboard.Click += new System.EventHandler(this.MenuItemImportClipboard_Click);
             // 
-            // panel1
+            // label14
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 24);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(515, 10);
-            this.panel1.TabIndex = 6;
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(431, 62);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(125, 12);
+            this.label14.TabIndex = 23;
+            this.label14.Text = "*伪装可用逗号(,)隔开";
             // 
-            // btnGUID
+            // label16
             // 
-            this.btnGUID.Location = new System.Drawing.Point(411, 83);
-            this.btnGUID.Name = "btnGUID";
-            this.btnGUID.Size = new System.Drawing.Size(75, 23);
-            this.btnGUID.TabIndex = 23;
-            this.btnGUID.Text = "生成(&G)";
-            this.btnGUID.UseVisualStyleBackColor = true;
-            this.btnGUID.Click += new System.EventHandler(this.btnGUID_Click);
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(431, 85);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(101, 12);
+            this.label16.TabIndex = 24;
+            this.label16.Text = "*ws path直接输入";
             // 
             // AddServerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(515, 453);
+            this.ClientSize = new System.Drawing.Size(606, 481);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -500,5 +523,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem MenuItemImportClipboard;
         private System.Windows.Forms.Button btnGUID;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label14;
     }
 }

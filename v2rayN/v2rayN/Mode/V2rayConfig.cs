@@ -208,7 +208,7 @@ namespace v2rayN.Mode
         public string tag { get; set; }
     }
 
-    
+
     public class OutboundDetoursettings
     {
         /// <summary>
@@ -300,7 +300,11 @@ namespace v2rayN.Mode
         /// <summary>
         /// Kcp传输额外设置
         /// </summary>
-        public Kcpsettings kcpsettings { get; set; }
+        public KcpSettings kcpSettings { get; set; }
+        /// <summary>
+        /// ws传输额外设置
+        /// </summary>
+        public WsSettings wsSettings { get; set; }
     }
 
     public class TcpSettings
@@ -331,7 +335,7 @@ namespace v2rayN.Mode
         public object response { get; set; }
     }
 
-    public class Kcpsettings
+    public class KcpSettings
     {
         /// <summary>
         /// 
@@ -365,5 +369,18 @@ namespace v2rayN.Mode
         /// 
         /// </summary>
         public Header header { get; set; }
+    }
+
+    public class WsSettings
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool connectionReuse { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string path { get; set; }
     }
 }

@@ -345,34 +345,38 @@ namespace v2rayN.Handler
                 {
                     //kcp基本配置暂时是默认值，用户能自己设置伪装类型
                     case "kcp":
-                        Kcpsettings kcpsettings = new Kcpsettings();
-                        kcpsettings.mtu = 1350;
-                        kcpsettings.tti = 50;
+                        KcpSettings kcpSettings = new KcpSettings();
+                        kcpSettings.mtu = 1350;
+                        kcpSettings.tti = 50;
                         if (iobound.Equals("out"))
                         {
-                            kcpsettings.uplinkCapacity = 12;
-                            kcpsettings.downlinkCapacity = 100;
+                            kcpSettings.uplinkCapacity = 12;
+                            kcpSettings.downlinkCapacity = 100;
                         }
                         else if (iobound.Equals("in"))
                         {
-                            kcpsettings.uplinkCapacity = 100;
-                            kcpsettings.downlinkCapacity = 100;
+                            kcpSettings.uplinkCapacity = 100;
+                            kcpSettings.downlinkCapacity = 100;
                         }
                         else
                         {
-                            kcpsettings.uplinkCapacity = 12;
-                            kcpsettings.downlinkCapacity = 100;
+                            kcpSettings.uplinkCapacity = 12;
+                            kcpSettings.downlinkCapacity = 100;
                         }
 
-                        kcpsettings.congestion = false;
-                        kcpsettings.readBufferSize = 2;
-                        kcpsettings.writeBufferSize = 2;
-                        kcpsettings.header = new Header();
-                        kcpsettings.header.type = config.headerType();
-                        streamSettings.kcpsettings = kcpsettings;
+                        kcpSettings.congestion = false;
+                        kcpSettings.readBufferSize = 2;
+                        kcpSettings.writeBufferSize = 2;
+                        kcpSettings.header = new Header();
+                        kcpSettings.header.type = config.headerType();
+                        streamSettings.kcpSettings = kcpSettings;
                         break;
                     //ws
                     case "ws":
+                        WsSettings wsSettings = new WsSettings();
+                        wsSettings.connectionReuse = true;
+                        wsSettings.path = config.requestHost();
+                        streamSettings.wsSettings = wsSettings;
                         break;
                     default:
                         //tcp带http伪装
@@ -385,7 +389,11 @@ namespace v2rayN.Handler
 
                             //request填入自定义Host
                             string request = Utils.GetEmbedText(Global.v2raySampleHttprequestFileName);
-                            request = request.Replace("$requestHost$", string.Format("\"{0}\"", config.requestHost()));
+                            string[] arrHost = config.requestHost().Split(',');
+                            string host = string.Join("\",\"", arrHost);
+                            request = request.Replace("$requestHost$", string.Format("\"{0}\"", host));
+                            //request = request.Replace("$requestHost$", string.Format("\"{0}\"", config.requestHost()));
+
                             string response = Utils.GetEmbedText(Global.v2raySampleHttpresponseFileName);
 
                             tcpSettings.header.request = Utils.FromJson<object>(request);
@@ -618,11 +626,11 @@ namespace v2rayN.Handler
                 }
                 //kcp伪装
                 if (v2rayConfig.outbound.streamSettings != null
-                    && v2rayConfig.outbound.streamSettings.kcpsettings != null
-                    && v2rayConfig.outbound.streamSettings.kcpsettings.header != null
-                    && !Utils.IsNullOrEmpty(v2rayConfig.outbound.streamSettings.kcpsettings.header.type))
+                    && v2rayConfig.outbound.streamSettings.kcpSettings != null
+                    && v2rayConfig.outbound.streamSettings.kcpSettings.header != null
+                    && !Utils.IsNullOrEmpty(v2rayConfig.outbound.streamSettings.kcpSettings.header.type))
                 {
-                    vmessItem.headerType = v2rayConfig.outbound.streamSettings.kcpsettings.header.type;
+                    vmessItem.headerType = v2rayConfig.outbound.streamSettings.kcpSettings.header.type;
                 }
 
             }
@@ -718,11 +726,11 @@ namespace v2rayN.Handler
                 }
                 ////kcp伪装
                 //if (v2rayConfig.outbound.streamSettings != null
-                //    && v2rayConfig.outbound.streamSettings.kcpsettings != null
-                //    && v2rayConfig.outbound.streamSettings.kcpsettings.header != null
-                //    && !Utils.IsNullOrEmpty(v2rayConfig.outbound.streamSettings.kcpsettings.header.type))
+                //    && v2rayConfig.outbound.streamSettings.kcpSettings != null
+                //    && v2rayConfig.outbound.streamSettings.kcpSettings.header != null
+                //    && !Utils.IsNullOrEmpty(v2rayConfig.outbound.streamSettings.kcpSettings.header.type))
                 //{
-                //    cmbHeaderType.Text = v2rayConfig.outbound.streamSettings.kcpsettings.header.type;
+                //    cmbHeaderType.Text = v2rayConfig.outbound.streamSettings.kcpSettings.header.type;
                 //}
             }
             catch
