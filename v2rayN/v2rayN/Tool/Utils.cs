@@ -95,7 +95,9 @@ namespace v2rayN
             string result = string.Empty;
             try
             {
-                result = JsonConvert.SerializeObject(obj);
+                result = JsonConvert.SerializeObject(obj
+                                                    Formatting.Indented,
+                                                    new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             }
             catch
             {
