@@ -95,9 +95,9 @@ namespace v2rayN
             string result = string.Empty;
             try
             {
-                result = JsonConvert.SerializeObject(obj
-                                                    Formatting.Indented,
-                                                    new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                result = JsonConvert.SerializeObject(obj,
+                                           Formatting.Indented,
+                                           new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             }
             catch
             {
@@ -118,7 +118,10 @@ namespace v2rayN
             {
                 using (StreamWriter file = System.IO.File.CreateText(filePath))
                 {
-                    JsonSerializer serializer = new JsonSerializer();
+                    //JsonSerializer serializer = new JsonSerializer();
+                    //JsonSerializer serializer = new JsonSerializer() { Formatting = Formatting.Indented};
+                    JsonSerializer serializer = new JsonSerializer() { Formatting = Formatting.Indented, NullValueHandling = NullValueHandling.Ignore };
+
                     serializer.Serialize(file, obj);
                 }
                 result = 0;
@@ -129,7 +132,6 @@ namespace v2rayN
             }
             return result;
         }
-
         #endregion
 
         #region 转换函数
