@@ -183,7 +183,7 @@ namespace v2rayN.Forms
                 ClearMsg();
             }
             v2rayHandler.LoadV2ray(config);
-            Global.reloadV2ray = false;
+            Global.reloadV2ray = false;            
         }
 
         /// <summary>

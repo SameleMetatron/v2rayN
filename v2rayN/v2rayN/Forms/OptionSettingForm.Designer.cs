@@ -32,6 +32,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkAutoSyncTime = new System.Windows.Forms.CheckBox();
             this.chkAutoRun = new System.Windows.Forms.CheckBox();
             this.chkmuxEnabled = new System.Windows.Forms.CheckBox();
             this.chkAllowIn2 = new System.Windows.Forms.CheckBox();
@@ -62,7 +63,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnOK = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.chkAutoSyncTime = new System.Windows.Forms.CheckBox();
+            this.chksysAgentEnabled = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -110,6 +111,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chksysAgentEnabled);
             this.groupBox1.Controls.Add(this.chkAutoSyncTime);
             this.groupBox1.Controls.Add(this.chkAutoRun);
             this.groupBox1.Controls.Add(this.chkmuxEnabled);
@@ -133,10 +135,20 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             // 
+            // chkAutoSyncTime
+            // 
+            this.chkAutoSyncTime.AutoSize = true;
+            this.chkAutoSyncTime.Location = new System.Drawing.Point(13, 247);
+            this.chkAutoSyncTime.Name = "chkAutoSyncTime";
+            this.chkAutoSyncTime.Size = new System.Drawing.Size(276, 16);
+            this.chkAutoSyncTime.TabIndex = 22;
+            this.chkAutoSyncTime.Text = "启动时自动从网络同步本地时间(可能会不成功)";
+            this.chkAutoSyncTime.UseVisualStyleBackColor = true;
+            // 
             // chkAutoRun
             // 
             this.chkAutoRun.AutoSize = true;
-            this.chkAutoRun.Location = new System.Drawing.Point(13, 202);
+            this.chkAutoRun.Location = new System.Drawing.Point(13, 220);
             this.chkAutoRun.Name = "chkAutoRun";
             this.chkAutoRun.Size = new System.Drawing.Size(180, 16);
             this.chkAutoRun.TabIndex = 21;
@@ -146,7 +158,7 @@
             // chkmuxEnabled
             // 
             this.chkmuxEnabled.AutoSize = true;
-            this.chkmuxEnabled.Location = new System.Drawing.Point(13, 140);
+            this.chkmuxEnabled.Location = new System.Drawing.Point(13, 158);
             this.chkmuxEnabled.Name = "chkmuxEnabled";
             this.chkmuxEnabled.Size = new System.Drawing.Size(174, 16);
             this.chkmuxEnabled.TabIndex = 20;
@@ -236,7 +248,7 @@
             // chklogEnabled
             // 
             this.chklogEnabled.AutoSize = true;
-            this.chklogEnabled.Location = new System.Drawing.Point(13, 171);
+            this.chklogEnabled.Location = new System.Drawing.Point(13, 189);
             this.chklogEnabled.Name = "chklogEnabled";
             this.chklogEnabled.Size = new System.Drawing.Size(156, 16);
             this.chklogEnabled.TabIndex = 9;
@@ -253,7 +265,7 @@
             "warning",
             "error",
             "none"});
-            this.cmbloglevel.Location = new System.Drawing.Point(257, 169);
+            this.cmbloglevel.Location = new System.Drawing.Point(257, 187);
             this.cmbloglevel.Name = "cmbloglevel";
             this.cmbloglevel.Size = new System.Drawing.Size(97, 20);
             this.cmbloglevel.TabIndex = 6;
@@ -261,7 +273,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(193, 173);
+            this.label5.Location = new System.Drawing.Point(193, 191);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 8;
@@ -440,15 +452,15 @@
             this.panel1.Size = new System.Drawing.Size(528, 10);
             this.panel1.TabIndex = 9;
             // 
-            // chkAutoSyncTime
+            // chksysAgentEnabled
             // 
-            this.chkAutoSyncTime.AutoSize = true;
-            this.chkAutoSyncTime.Location = new System.Drawing.Point(13, 229);
-            this.chkAutoSyncTime.Name = "chkAutoSyncTime";
-            this.chkAutoSyncTime.Size = new System.Drawing.Size(276, 16);
-            this.chkAutoSyncTime.TabIndex = 22;
-            this.chkAutoSyncTime.Text = "启动时自动从网络同步本地时间(可能会不成功)";
-            this.chkAutoSyncTime.UseVisualStyleBackColor = true;
+            this.chksysAgentEnabled.AutoSize = true;
+            this.chksysAgentEnabled.Location = new System.Drawing.Point(13, 98);
+            this.chksysAgentEnabled.Name = "chksysAgentEnabled";
+            this.chksysAgentEnabled.Size = new System.Drawing.Size(276, 16);
+            this.chksysAgentEnabled.TabIndex = 23;
+            this.chksysAgentEnabled.Text = "启用系统代理(本地监听端口中必须有http协议)";
+            this.chksysAgentEnabled.UseVisualStyleBackColor = true;
             // 
             // OptionSettingForm
             // 
@@ -519,5 +531,6 @@
         private System.Windows.Forms.TextBox txtUserdirect;
         private System.Windows.Forms.TextBox txtUserblock;
         private System.Windows.Forms.CheckBox chkAutoSyncTime;
+        private System.Windows.Forms.CheckBox chksysAgentEnabled;
     }
 }

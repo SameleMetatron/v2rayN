@@ -69,6 +69,11 @@ namespace v2rayN.Mode
         /// </summary>
         public bool autoSyncTime { get; set; }
 
+        /// <summary>
+        /// 启用系统代理
+        /// </summary>
+        public bool sysAgentEnabled { get; set; }
+
         #region 函数
 
         public string address()

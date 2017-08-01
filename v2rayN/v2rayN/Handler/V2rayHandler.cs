@@ -48,6 +48,7 @@ namespace v2rayN.Handler
                 {
                     ShowMsg(true, msg);
                     V2rayRestart();
+                    SetSysAgent(config);
                 }
             }
         }
@@ -76,6 +77,14 @@ namespace v2rayN.Handler
                         p.Kill();
                     }
                 }
+
+                //开启全局代理则关闭
+                if (Global.setSysAgent)
+                {
+                    ProxySetting.UnsetProxy();
+                    Global.setSysAgent = false;
+                }
+
             }
             catch (Exception)
             {
@@ -133,6 +142,7 @@ namespace v2rayN.Handler
                 ShowMsg(true, msg);
             }
         }
+
         /// <summary>
         /// 消息委托
         /// </summary>
@@ -143,6 +153,39 @@ namespace v2rayN.Handler
             if (ProcessEvent != null)
             {
                 ProcessEvent(notify, msg);
+            }
+        }
+
+        /// <summary>
+        /// 启用系统代理
+        /// </summary>
+        /// <param name="config"></param>
+        private void SetSysAgent(Config config)
+        {
+            try
+            {
+                if (!config.sysAgentEnabled)
+                {
+                    return;
+                }
+
+                string strProxy = string.Empty;
+                foreach (InItem inItem in config.inbound)
+                {
+                    if (inItem.protocol.Equals("http"))
+                    {
+                        strProxy = string.Format("127.0.0.1:{0}", inItem.localPort);
+                        break;
+                    }
+                }
+                if (!string.IsNullOrEmpty(strProxy))
+                {
+                    ProxySetting.SetProxy(strProxy);
+                    Global.setSysAgent = true;
+                }
+            }
+            catch
+            {
             }
         }
     }

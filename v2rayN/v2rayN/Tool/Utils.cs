@@ -119,8 +119,8 @@ namespace v2rayN
                 using (StreamWriter file = System.IO.File.CreateText(filePath))
                 {
                     //JsonSerializer serializer = new JsonSerializer();
-                    //JsonSerializer serializer = new JsonSerializer() { Formatting = Formatting.Indented};
-                    JsonSerializer serializer = new JsonSerializer() { Formatting = Formatting.Indented, NullValueHandling = NullValueHandling.Ignore };
+                    JsonSerializer serializer = new JsonSerializer() { Formatting = Formatting.Indented };
+                    //JsonSerializer serializer = new JsonSerializer() { Formatting = Formatting.Indented, NullValueHandling = NullValueHandling.Ignore };
 
                     serializer.Serialize(file, obj);
                 }

@@ -56,6 +56,8 @@ namespace v2rayN.Forms
             //自动从网络同步本地时间
             chkAutoSyncTime.Checked = config.autoSyncTime;
 
+            //启用系统代理 
+            chksysAgentEnabled.Checked = config.sysAgentEnabled;
         }
 
         /// <summary>
@@ -169,6 +171,9 @@ namespace v2rayN.Forms
 
             //自动从网络同步本地时间
             config.autoSyncTime = chkAutoSyncTime.Checked;
+            
+            //启用系统代理 
+            config.sysAgentEnabled = chksysAgentEnabled.Checked;
 
             return 0;
         }

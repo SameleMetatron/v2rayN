@@ -99,7 +99,10 @@ namespace v2rayN
         /// </summary>
         public static bool reloadV2ray { get; set; }
 
-
+        /// <summary>
+        /// 是否开启全局代理
+        /// </summary>
+        public static bool setSysAgent { get; set; }
         #endregion
 
 
