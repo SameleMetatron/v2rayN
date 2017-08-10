@@ -38,6 +38,9 @@ namespace v2rayN.Handler
 
                 //Mux
                 config.muxEnabled = true;
+
+                //默认监听端口
+                config.sysListenerPort = 8888;
             }
 
             //本地监听
@@ -50,6 +53,13 @@ namespace v2rayN.Handler
                 inItem.udpEnabled = true;
 
                 config.inbound.Add(inItem);
+
+                //inItem = new InItem();
+                //inItem.protocol = "http";
+                //inItem.localPort = 1081;
+                //inItem.udpEnabled = true;
+
+                //config.inbound.Add(inItem);
             }
             //路由规则
             if (config.useragent == null)

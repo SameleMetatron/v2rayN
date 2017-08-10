@@ -57,7 +57,9 @@ namespace v2rayN.Forms
             chkAutoSyncTime.Checked = config.autoSyncTime;
 
             //启用系统代理 
-            chksysAgentEnabled.Checked = config.sysAgentEnabled;
+            //chksysAgentEnabled.Checked = config.sysAgentEnabled;
+
+            txtPACServerPort.Text = config.sysListenerPort.ToString();
         }
 
         /// <summary>
@@ -173,7 +175,10 @@ namespace v2rayN.Forms
             config.autoSyncTime = chkAutoSyncTime.Checked;
             
             //启用系统代理 
-            config.sysAgentEnabled = chksysAgentEnabled.Checked;
+            config.sysAgentEnabled = true; //chksysAgentEnabled.Checked;
+
+            // PAC监听端口
+            config.sysListenerPort = Convert.ToInt32(txtPACServerPort.Text);
 
             return 0;
         }

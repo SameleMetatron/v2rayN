@@ -13,6 +13,8 @@ namespace v2rayN.Forms
     {
         private V2rayHandler v2rayHandler;
 
+        private PACListHandle pacListHandle;
+
         #region Window 事件
 
         public MainForm()
@@ -21,7 +23,22 @@ namespace v2rayN.Forms
             this.ShowInTaskbar = false;
             this.WindowState = FormWindowState.Minimized;
             this.Text = Utils.GetVersion();
-
+            pacListHandle = new PACListHandle();
+            pacListHandle.UpdateCompleted += (sender, args) =>
+            {
+                if (args.Success)
+                {
+                    v2rayHandler_ProcessEvent(true, "PACList更新成功！");
+                }
+                else
+                {
+                    v2rayHandler_ProcessEvent(true, "PACList更新失败！");
+                }
+            };
+            pacListHandle.Error += (sender, args) =>
+            {
+                v2rayHandler_ProcessEvent(true, args.GetException().Message);
+            };
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -29,6 +46,8 @@ namespace v2rayN.Forms
             ConfigHandler.LoadConfig(ref config);
             v2rayHandler = new V2rayHandler();
             v2rayHandler.ProcessEvent += v2rayHandler_ProcessEvent;
+
+            ChangePACButtonStatus(config.listenerType);
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -119,16 +138,18 @@ namespace v2rayN.Forms
                 }
 
                 VmessItem item = config.vmess[k];
-                ListViewItem lvItem = new ListViewItem(new string[] {  
-                                                def,
-                                                item.remarks,
-                                                item.address,
-                                                item.port.ToString(),
-                                                item.id,
-                                                item.alterId.ToString(),
-                                                item.security,
-                                                item.network,
-                                                ""});
+                ListViewItem lvItem = new ListViewItem(new string[]
+                {
+                    def,
+                    item.remarks,
+                    item.address,
+                    item.port.ToString(),
+                    item.id,
+                    item.alterId.ToString(),
+                    item.security,
+                    item.network,
+                    ""
+                });
                 lvServers.Items.Add(lvItem);
             }
 
@@ -156,11 +177,12 @@ namespace v2rayN.Forms
                 menuServers.DropDownItems.Add(ts);
             }
         }
+
         private void ts_Click(object sender, EventArgs e)
         {
             try
             {
-                ToolStripItem ts = (ToolStripItem)sender;
+                ToolStripItem ts = (ToolStripItem) sender;
                 int index = Convert.ToInt32(ts.Tag);
                 SetDefaultServer(index);
             }
@@ -183,7 +205,7 @@ namespace v2rayN.Forms
                 ClearMsg();
             }
             v2rayHandler.LoadV2ray(config);
-            Global.reloadV2ray = false;            
+            Global.reloadV2ray = false;
         }
 
         /// <summary>
@@ -453,11 +475,12 @@ namespace v2rayN.Forms
         }
 
         delegate void AppendTextDelegate(string text);
+
         void AppendText(string text)
         {
             if (this.txtMsgBox.InvokeRequired)
             {
-                Invoke(new AppendTextDelegate(AppendText), new object[] { text });
+                Invoke(new AppendTextDelegate(AppendText), new object[] {text});
             }
             else
             {
@@ -508,6 +531,7 @@ namespace v2rayN.Forms
                 ShowForm();
             }
         }
+
         private void menuOpenMain_Click(object sender, EventArgs e)
         {
             ShowForm();
@@ -547,6 +571,7 @@ namespace v2rayN.Forms
             this.Hide();
             this.notifyMain.Visible = true;
         }
+
         #endregion
 
         #region 后台测速
@@ -565,6 +590,7 @@ namespace v2rayN.Forms
             {
             }
         }
+
         private void bgwPing_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
             try
@@ -620,6 +646,59 @@ namespace v2rayN.Forms
         }
 
         #endregion
+
+        #region PAC相关
+
+        private void menuUpdatePACList_Click(object sender, EventArgs e)
+        {
+            pacListHandle.UpdatePACFromGFWList(config);
+        }
+
+        private void menuGlobal_Click(object sender, EventArgs e)
+        {
+            config.listenerType = 1;
+            ChangePACButtonStatus(1);
+            SystemProxyHandle.Update(config, false);
+        }
+
+        private void menuPAC_Click(object sender, EventArgs e)
+        {
+            config.listenerType = 2;
+            ChangePACButtonStatus(2);
+            SystemProxyHandle.Update(config, false);
+        }
+
+        private void menuKeep_Click(object sender, EventArgs e)
+        {
+            config.listenerType = 0;
+            ChangePACButtonStatus(0);
+            SystemProxyHandle.Update(config, false);
+        }
+
+        private void ChangePACButtonStatus(int type)
+        {
+            switch (type)
+            {
+                case 0:
+                    menuGlobal.Checked = false;
+                    menuKeep.Checked = true;
+                    menuPAC.Checked = false;
+                    break;
+                case 1:
+                    menuGlobal.Checked = true;
+                    menuKeep.Checked = false;
+                    menuPAC.Checked = false;
+                    break;
+                case 2:
+                    menuGlobal.Checked = false;
+                    menuKeep.Checked = false;
+                    menuPAC.Checked = true;
+                    break;
+            }
+        }
+
+        #endregion
+
 
     }
 }

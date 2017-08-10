@@ -23,6 +23,7 @@ namespace v2rayN.Handler
         private static string v2rayConfigRes = Global.v2rayConfigFileName;
         private List<string> lstV2ray;
         public event ProcessDelegate ProcessEvent;
+        private Config config;
 
         public V2rayHandler()
         {
@@ -36,6 +37,7 @@ namespace v2rayN.Handler
         /// </summary>
         public void LoadV2ray(Config config)
         {
+            this.config = config;
             if (Global.reloadV2ray)
             {
                 string msg = string.Empty;
@@ -78,10 +80,12 @@ namespace v2rayN.Handler
                     }
                 }
 
+                Utils.ClearTempPath();
                 //开启全局代理则关闭
                 if (Global.setSysAgent)
                 {
                     ProxySetting.UnsetProxy();
+                    SystemProxyHandle.Update(config, true);
                     Global.setSysAgent = false;
                 }
 
@@ -162,31 +166,8 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         private void SetSysAgent(Config config)
         {
-            try
-            {
-                if (!config.sysAgentEnabled)
-                {
-                    return;
-                }
-
-                string strProxy = string.Empty;
-                foreach (InItem inItem in config.inbound)
-                {
-                    if (inItem.protocol.Equals("http"))
-                    {
-                        strProxy = string.Format("127.0.0.1:{0}", inItem.localPort);
-                        break;
-                    }
-                }
-                if (!string.IsNullOrEmpty(strProxy))
-                {
-                    ProxySetting.SetProxy(strProxy);
-                    Global.setSysAgent = true;
-                }
-            }
-            catch
-            {
-            }
+            SystemProxyHandle.Update(config, false);
+            Global.setSysAgent = true;
         }
     }
 }

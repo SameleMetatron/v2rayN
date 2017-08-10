@@ -74,6 +74,16 @@ namespace v2rayN.Mode
         /// </summary>
         public bool sysAgentEnabled { get; set; }
 
+        /// <summary>
+        /// 监听端口号
+        /// </summary>
+        public int sysListenerPort { get; set; }
+
+        /// <summary>
+        /// 监听状态 0-不改变 1-全局 2-PAC
+        /// </summary>
+        public int listenerType { get; set; }
+
         #region 函数
 
         public string address()
