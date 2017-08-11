@@ -39,6 +39,11 @@ namespace v2rayN.Forms
             {
                 v2rayHandler_ProcessEvent(true, args.GetException().Message);
             };
+
+            Application.ApplicationExit += (sender, args) =>
+            {
+                Utils.ClearTempPath();
+            };
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -544,7 +549,8 @@ namespace v2rayN.Forms
             this.Visible = false;
             this.Close();
             //this.Dispose();
-            System.Environment.Exit(System.Environment.ExitCode);
+            //System.Environment.Exit(System.Environment.ExitCode);
+            Application.Exit();
         }
 
         private void menuUpdate_Click(object sender, EventArgs e)
@@ -658,43 +664,44 @@ namespace v2rayN.Forms
         {
             config.listenerType = 1;
             ChangePACButtonStatus(1);
-            SystemProxyHandle.Update(config, false);
         }
 
         private void menuPAC_Click(object sender, EventArgs e)
         {
             config.listenerType = 2;
             ChangePACButtonStatus(2);
-            SystemProxyHandle.Update(config, false);
         }
 
         private void menuKeep_Click(object sender, EventArgs e)
         {
             config.listenerType = 0;
             ChangePACButtonStatus(0);
-            SystemProxyHandle.Update(config, false);
         }
 
         private void ChangePACButtonStatus(int type)
         {
-            switch (type)
+            if (SystemProxyHandle.Update(config, false))
             {
-                case 0:
-                    menuGlobal.Checked = false;
-                    menuKeep.Checked = true;
-                    menuPAC.Checked = false;
-                    break;
-                case 1:
-                    menuGlobal.Checked = true;
-                    menuKeep.Checked = false;
-                    menuPAC.Checked = false;
-                    break;
-                case 2:
-                    menuGlobal.Checked = false;
-                    menuKeep.Checked = false;
-                    menuPAC.Checked = true;
-                    break;
+                switch (type)
+                {
+                    case 0:
+                        menuGlobal.Checked = false;
+                        menuKeep.Checked = true;
+                        menuPAC.Checked = false;
+                        break;
+                    case 1:
+                        menuGlobal.Checked = true;
+                        menuKeep.Checked = false;
+                        menuPAC.Checked = false;
+                        break;
+                    case 2:
+                        menuGlobal.Checked = false;
+                        menuKeep.Checked = false;
+                        menuPAC.Checked = true;
+                        break;
+                }
             }
+            
         }
 
         #endregion

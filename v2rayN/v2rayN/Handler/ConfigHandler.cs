@@ -75,6 +75,12 @@ namespace v2rayN.Handler
                 config.userblock = new List<string>();
             }
 
+            // 如果是用户升级，首次会有端口号为0的情况，不可用，这里处理
+            if (config.sysListenerPort == 0)
+            {
+                config.sysListenerPort = 8888;
+            }
+
             if (config == null
                 || config.index < 0
                 || config.vmess.Count <= 0

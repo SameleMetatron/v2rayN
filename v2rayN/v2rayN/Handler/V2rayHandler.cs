@@ -79,8 +79,6 @@ namespace v2rayN.Handler
                         p.Kill();
                     }
                 }
-
-                Utils.ClearTempPath();
                 //开启全局代理则关闭
                 if (Global.setSysAgent)
                 {

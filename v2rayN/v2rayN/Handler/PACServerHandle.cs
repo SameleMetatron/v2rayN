@@ -38,6 +38,8 @@ namespace v2rayN.Handler
         private static void GetPacList(object config)
         {
             var cfg = config as Config;
+            var httpProxy = cfg.inbound.FirstOrDefault(x => x.protocol == "http");
+            var proxy = $"PROXY 127.0.0.1:{httpProxy.localPort};";
             while (pacLinstener != null && pacLinstener.IsListening)
             {
                 HttpListenerContext requestContext = null;
@@ -55,12 +57,6 @@ namespace v2rayN.Handler
                             new PACListHandle().UpdatePACFromGFWList(cfg);
                         }
                         var pac = File.ReadAllText(PAC_FILE, Encoding.UTF8);
-                        var proxy = "";
-                        foreach (var inbound in cfg.inbound)
-                        {
-                            proxy +=
-                                $"{(inbound.protocol == "socks" ? "SOCKS5 " : "PROXY ")}127.0.0.1:{inbound.localPort};";
-                        }
                         pac = pac.Replace("__PROXY__", proxy);
                         byte[] buffer = System.Text.Encoding.UTF8.GetBytes(pac);
                         //对客户端输出相应信息.  

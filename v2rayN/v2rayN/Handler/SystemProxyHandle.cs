@@ -23,7 +23,7 @@ namespace v2rayN.Handler
             Update(config, false);
         }
 
-        public static void Update(Config config, bool forceDisable)
+        public static bool Update(Config config, bool forceDisable)
         {
             int type = config.listenerType;
 
@@ -36,13 +36,14 @@ namespace v2rayN.Handler
             {
                 if (type != 0)
                 {
+                    var localHttp = config.inbound.FirstOrDefault(x => x.protocol == "http");
+                    if (localHttp == null)
+                    {
+                        return false;
+                    }
                     if (type == 1)
                     {
-                        var localHttp = config.inbound.FirstOrDefault(x => x.protocol == "http");
-                        if (localHttp == null)
-                        {
-                            return;
-                        }
+                        
                         PACServerHandle.Stop();
                         PACFileWatcherHandle.StopWatch();
                         SysProxyHandle.SetIEProxy(true, true, "127.0.0.1:" + localHttp.localPort.ToString(), null);
@@ -66,6 +67,7 @@ namespace v2rayN.Handler
             {
                 //Logging.LogUsefulException(ex);
             }
+            return true;
         }
     }
 }
