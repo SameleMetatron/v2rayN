@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handler\PACFileWatcherHandle.cs" />
     <Compile Include="Handler\PACListHandle.cs" />
     <Compile Include="Handler\PACServerHandle.cs" />
     <Compile Include="Handler\SysProxyHandle.cs" />

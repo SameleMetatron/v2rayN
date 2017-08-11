@@ -13,6 +13,16 @@ namespace v2rayN.Handler
             return value.ToString("yyyyMMddHHmmssfff");
         }
 
+        public static void ReSetPACProxy(Config config)
+        {
+            if (config.listenerType == 2)
+            {
+                SysProxyHandle.SetIEProxy(false, false, null, null);
+                PACServerHandle.Stop();
+            }
+            Update(config, false);
+        }
+
         public static void Update(Config config, bool forceDisable)
         {
             int type = config.listenerType;
@@ -34,19 +44,22 @@ namespace v2rayN.Handler
                             return;
                         }
                         PACServerHandle.Stop();
+                        PACFileWatcherHandle.StopWatch();
                         SysProxyHandle.SetIEProxy(true, true, "127.0.0.1:" + localHttp.localPort.ToString(), null);
                     }
                     else
                     {
-                        string pacUrl = $"http://127.0.0.1:{config.sysListenerPort}/pac/";
+                        string pacUrl = $"http://127.0.0.1:{config.sysListenerPort}/pac/?t={GetTimestamp(DateTime.Now)}";
                         SysProxyHandle.SetIEProxy(true, false, null, pacUrl);
                         PACServerHandle.Init(config);
+                        PACFileWatcherHandle.StartWatch(config);
                     }
                 }
                 else
                 {
                     SysProxyHandle.SetIEProxy(false, false, null, null);
                     PACServerHandle.Stop();
+                    PACFileWatcherHandle.StopWatch();
                 }
             }
             catch (Exception ex)

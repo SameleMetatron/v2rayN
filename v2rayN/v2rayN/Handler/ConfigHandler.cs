@@ -54,12 +54,12 @@ namespace v2rayN.Handler
 
                 config.inbound.Add(inItem);
 
-                //inItem = new InItem();
-                //inItem.protocol = "http";
-                //inItem.localPort = 1081;
-                //inItem.udpEnabled = true;
+                inItem = new InItem();
+                inItem.protocol = "http";
+                inItem.localPort = 1081;
+                inItem.udpEnabled = true;
 
-                //config.inbound.Add(inItem);
+                config.inbound.Add(inItem);
             }
             //路由规则
             if (config.useragent == null)

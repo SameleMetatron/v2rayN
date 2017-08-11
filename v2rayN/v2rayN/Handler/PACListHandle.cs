@@ -34,12 +34,13 @@ namespace v2rayN.Handler
 
         public void UpdatePACFromGFWList(Config config)
         {
-            var httpProxy = config.inbound.FirstOrDefault();
+            var httpProxy = config.inbound.FirstOrDefault(x => x.protocol=="http");
             if (httpProxy == null)
             {
                 throw new Exception("未发现HTTP代理，无法设置代理更新");
             }
             WebClient http = new WebClient();
+            http.Headers.Add("Connection", "Close");
             http.Proxy = new WebProxy(IPAddress.Loopback.ToString(), httpProxy.localPort);
             http.DownloadStringCompleted += http_DownloadStringCompleted;
             http.DownloadStringAsync(new Uri(GFWLIST_URL));

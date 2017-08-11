@@ -18,17 +18,19 @@ namespace v2rayN.Handler
         public static void Init(Config config)
         {
             pacLinstener = new HttpListener(); //创建监听实例  
-            pacLinstener.Prefixes.Add(string.Format("http://127.0.0.1:{0}/pac/", config.sysListenerPort)); //添加监听地址 注意是以/结尾。  
+            pacLinstener.Prefixes.Add($"http://127.0.0.1:{config.sysListenerPort}/pac/"); //添加监听地址 注意是以/结尾。  
             pacLinstener.Start(); //允许该监听地址接受请求的传入。  
             Thread threadpacLinstener = new Thread(new ParameterizedThreadStart(GetPacList)); //创建开启一个线程监听该地址得请求  
+            threadpacLinstener.IsBackground = true;
             threadpacLinstener.Start(config);
+
         }
 
         public static void Stop()
         {
             if (pacLinstener != null && pacLinstener.IsListening)
             {
-                pacLinstener.Stop();
+                pacLinstener.Abort();
                 pacLinstener = null;
             }
         }
@@ -36,11 +38,12 @@ namespace v2rayN.Handler
         private static void GetPacList(object config)
         {
             var cfg = config as Config;
-            while (true)
+            while (pacLinstener != null && pacLinstener.IsListening)
             {
-                HttpListenerContext requestContext = pacLinstener.GetContext(); //接受到新的请求  
+                HttpListenerContext requestContext = null;
                 try
                 {
+                    requestContext = pacLinstener.GetContext(); //接受到新的请求  
                     //reecontext 为开启线程传入的 requestContext请求对象  
                     Thread subthread = new Thread(new ParameterizedThreadStart((reecontext) =>
                     {
@@ -68,6 +71,10 @@ namespace v2rayN.Handler
                         output.Close();
                     }));
                     subthread.Start(requestContext); //开启处理线程处理下载文件  
+                }
+                catch (HttpListenerException)
+                {
+                    continue;
                 }
                 catch (Exception ex)
                 {
