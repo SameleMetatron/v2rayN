@@ -64,6 +64,18 @@ namespace v2rayN.Handler
             {
                 config.userblock = new List<string>();
             }
+            //kcp
+            if (config.kcpItem == null)
+            {
+                config.kcpItem = new KcpItem();
+                config.kcpItem.mtu = 1350;
+                config.kcpItem.tti = 50;
+                config.kcpItem.uplinkCapacity = 12;
+                config.kcpItem.downlinkCapacity = 100;
+                config.kcpItem.readBufferSize = 2;
+                config.kcpItem.writeBufferSize = 2;
+                config.kcpItem.congestion = false;
+            }
 
             if (config == null
                 || config.index < 0

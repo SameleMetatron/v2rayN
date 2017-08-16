@@ -74,6 +74,8 @@ namespace v2rayN.Mode
         /// </summary>
         public bool sysAgentEnabled { get; set; }
 
+        public KcpItem kcpItem { get; set; }
+
         #region 函数
 
         public string address()
@@ -231,5 +233,38 @@ namespace v2rayN.Mode
         /// 允许udp
         /// </summary>
         public bool udpEnabled { get; set; }
+    }
+
+    [Serializable]
+    public class KcpItem
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public int mtu { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int tti { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int uplinkCapacity { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int downlinkCapacity { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool congestion { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int readBufferSize { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int writeBufferSize { get; set; }
     }
 }

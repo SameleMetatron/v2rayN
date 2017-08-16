@@ -16,6 +16,8 @@ namespace v2rayN.Forms
             InitBase();
 
             InitRouting();
+
+            InitKCP();
         }
 
         /// <summary>
@@ -74,6 +76,20 @@ namespace v2rayN.Forms
             txtUserblock.Text = Utils.List2String(config.userblock);
         }
 
+        /// <summary>
+        /// 初始化KCP设置
+        /// </summary>
+        private void InitKCP()
+        {
+            txtKcpmtu.Text = config.kcpItem.mtu.ToString();
+            txtKcptti.Text = config.kcpItem.tti.ToString();
+            txtKcpuplinkCapacity.Text = config.kcpItem.uplinkCapacity.ToString();
+            txtKcpdownlinkCapacity.Text = config.kcpItem.downlinkCapacity.ToString();
+            txtKcpreadBufferSize.Text = config.kcpItem.readBufferSize.ToString();
+            txtKcpwriteBufferSize.Text = config.kcpItem.writeBufferSize.ToString();
+            chkKcpcongestion.Checked = config.kcpItem.congestion;
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (SaveBase() != 0)
@@ -82,6 +98,11 @@ namespace v2rayN.Forms
             }
 
             if (SaveRouting() != 0)
+            {
+                return;
+            }
+
+            if (SaveKCP() != 0)
             {
                 return;
             }
@@ -171,7 +192,7 @@ namespace v2rayN.Forms
 
             //自动从网络同步本地时间
             config.autoSyncTime = chkAutoSyncTime.Checked;
-            
+
             //启用系统代理 
             config.sysAgentEnabled = chksysAgentEnabled.Checked;
 
@@ -198,6 +219,41 @@ namespace v2rayN.Forms
             config.useragent = Utils.String2List(useragent);
             config.userdirect = Utils.String2List(userdirect);
             config.userblock = Utils.String2List(userblock);
+
+            return 0;
+        }
+
+        /// <summary>
+        /// 保存KCP设置
+        /// </summary>
+        /// <returns></returns>
+        private int SaveKCP()
+        {
+            string mtu = txtKcpmtu.Text;
+            string tti = txtKcptti.Text;
+            string uplinkCapacity = txtKcpuplinkCapacity.Text;
+            string downlinkCapacity = txtKcpdownlinkCapacity.Text;
+            string readBufferSize = txtKcpreadBufferSize.Text;
+            string writeBufferSize = txtKcpwriteBufferSize.Text;
+            bool congestion = chkKcpcongestion.Checked;
+
+            if (Utils.IsNullOrEmpty(mtu) || !Utils.IsNumberic(mtu)
+                || Utils.IsNullOrEmpty(tti) || !Utils.IsNumberic(tti)
+                || Utils.IsNullOrEmpty(uplinkCapacity) || !Utils.IsNumberic(uplinkCapacity)
+                || Utils.IsNullOrEmpty(downlinkCapacity) || !Utils.IsNumberic(downlinkCapacity)
+                || Utils.IsNullOrEmpty(readBufferSize) || !Utils.IsNumberic(readBufferSize)
+                || Utils.IsNullOrEmpty(writeBufferSize) || !Utils.IsNumberic(writeBufferSize))
+            {
+                UI.Show("请正确填写KCP参数");
+                return -1;
+            }
+            config.kcpItem.mtu = Convert.ToInt32(mtu);
+            config.kcpItem.tti = Convert.ToInt32(tti);
+            config.kcpItem.uplinkCapacity = Convert.ToInt32(uplinkCapacity);
+            config.kcpItem.downlinkCapacity = Convert.ToInt32(downlinkCapacity);
+            config.kcpItem.readBufferSize = Convert.ToInt32(readBufferSize);
+            config.kcpItem.writeBufferSize = Convert.ToInt32(writeBufferSize);
+            config.kcpItem.congestion = congestion;
 
             return 0;
         }
