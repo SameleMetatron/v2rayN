@@ -22,12 +22,11 @@ json data
     "type": "none",  
     "host": "www.bbb.com",  
     "tls": "tls"  
-}  
-  
-net: transport protocol (tcp \ kcp \ ws)
-type: camouflage type (none \ http \ srtp \ utp \ wechat-video)
-host: camouflage domain
-tls: tls (tls \)
+}   
+net: transport protocol (tcp \ kcp \ ws)  
+type: camouflage type (none \ http \ srtp \ utp \ wechat-video)  
+host: camouflage domain  
+tls: tls (tls \)  
 
 ------------
 
