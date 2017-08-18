@@ -389,7 +389,7 @@ namespace v2rayN.Handler
 
                             //request填入自定义Host
                             string request = Utils.GetEmbedText(Global.v2raySampleHttprequestFileName);
-                            string[] arrHost = config.requestHost().Split(',');
+                            string[] arrHost = config.requestHost().Replace(" ", "").Split(',');
                             string host = string.Join("\",\"", arrHost);
                             request = request.Replace("$requestHost$", string.Format("\"{0}\"", host));
                             //request = request.Replace("$requestHost$", string.Format("\"{0}\"", config.requestHost()));

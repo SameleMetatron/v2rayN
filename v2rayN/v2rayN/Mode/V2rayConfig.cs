@@ -293,6 +293,12 @@ namespace v2rayN.Mode
         /// 
         /// </summary>
         public string security { get; set; }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public TlsSettings tlsSettings { get; set; }
+
         /// <summary>
         /// Tcp传输额外设置
         /// </summary>
@@ -305,6 +311,14 @@ namespace v2rayN.Mode
         /// ws传输额外设置
         /// </summary>
         public WsSettings wsSettings { get; set; }
+    }
+
+    public class TlsSettings
+    {
+        /// <summary>
+        /// 是否允许不安全连接（用于客户端）
+        /// </summary>
+        public bool allowInsecure { get; set; }
     }
 
     public class TcpSettings

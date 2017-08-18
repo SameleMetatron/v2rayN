@@ -149,7 +149,7 @@ namespace v2rayN.Forms
             vmessItem.remarks = remarks;
 
             vmessItem.headerType = headerType;
-            vmessItem.requestHost = requestHost;
+            vmessItem.requestHost = requestHost.Replace(" ", "");
             vmessItem.streamSecurity = streamSecurity;
 
             if (ConfigHandler.AddServer(ref config, vmessItem, EditIndex) == 0)
