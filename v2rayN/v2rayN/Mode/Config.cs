@@ -75,6 +75,8 @@ namespace v2rayN.Mode
         public bool sysAgentEnabled { get; set; }
 
         public KcpItem kcpItem { get; set; }
+        
+        /// <summary>
         /// 监听端口号
         /// </summary>
         public int sysListenerPort { get; set; }

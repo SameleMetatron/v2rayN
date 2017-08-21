@@ -91,6 +91,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handler\PACFileWatcherHandle.cs" />
     <Compile Include="Handler\PrivoxyHandler.cs" />
     <Compile Include="Handler\PACListHandle.cs" />
     <Compile Include="Handler\PACServerHandle.cs" />
@@ -181,6 +182,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\abp.js.gz" />
     <None Include="Resources\pac.txt.gz" />
     <None Include="Resources\sysproxy.exe.gz" />
     <None Include="Resources\sysproxy64.exe.gz" />

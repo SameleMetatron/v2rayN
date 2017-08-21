@@ -40,8 +40,8 @@ namespace v2rayN.Handler
         private static void GetPacList(object config)
         {
             var cfg = config as Config;
-            var httpProxy = cfg.inbound.FirstOrDefault(x => x.protocol == "http");
-            var proxy = string.Format("PROXY 127.0.0.1:{0};", httpProxy.localPort);
+            var port = Utils.GetHttpPortNum(cfg);
+            var proxy = string.Format("PROXY 127.0.0.1:{0};", port);
             while (pacLinstener != null && pacLinstener.IsListening)
             {
                 HttpListenerContext requestContext = null;
@@ -58,7 +58,7 @@ namespace v2rayN.Handler
                         {
                             //TODO:暂时没解决更新PAC列表的问题，用直接解压现有PAC解决
                             //new PACListHandle().UpdatePACFromGFWList(cfg);
-                            FileManager.UncompressFile("./pac.txt", Resources.pac_txt);
+                            FileManager.UncompressFile(PAC_FILE, Resources.pac_txt);
                         }
                         var pac = File.ReadAllText(PAC_FILE, Encoding.UTF8);
                         pac = pac.Replace("__PROXY__", proxy);

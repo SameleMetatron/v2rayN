@@ -36,8 +36,8 @@ namespace v2rayN.Handler
             {
                 if (type != 0)
                 {
-                    var localHttp = config.inbound.FirstOrDefault(x => x.protocol == "http");
-                    if (localHttp == null)
+                    var port = Utils.GetHttpPortNum(config);
+                    if (port == -1)
                     {
                         return false;
                     }
@@ -46,7 +46,7 @@ namespace v2rayN.Handler
                         
                         PACServerHandle.Stop();
                         PACFileWatcherHandle.StopWatch();
-                        SysProxyHandle.SetIEProxy(true, true, "127.0.0.1:" + localHttp.localPort.ToString(), null);
+                        SysProxyHandle.SetIEProxy(true, true, "127.0.0.1:" + port, null);
                     }
                     else
                     {

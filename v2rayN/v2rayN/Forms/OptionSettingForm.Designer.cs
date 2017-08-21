@@ -78,8 +78,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnOK = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtPACServerPort = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.txtPACPort = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -132,8 +132,9 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txtPACServerPort);
-            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.txtPACPort);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.chksysAgentEnabled);
             this.groupBox1.Controls.Add(this.chkAutoSyncTime);
             this.groupBox1.Controls.Add(this.chkAutoRun);
             this.groupBox1.Controls.Add(this.chkmuxEnabled);
@@ -164,9 +165,10 @@
             this.chksysAgentEnabled.AutoSize = true;
             this.chksysAgentEnabled.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.chksysAgentEnabled.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chksysAgentEnabled.Location = new System.Drawing.Point(13, 100);
+            this.chksysAgentEnabled.Location = new System.Drawing.Point(17, 125);
+            this.chksysAgentEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chksysAgentEnabled.Name = "chksysAgentEnabled";
-            this.chksysAgentEnabled.Size = new System.Drawing.Size(412, 16);
+            this.chksysAgentEnabled.Size = new System.Drawing.Size(515, 19);
             this.chksysAgentEnabled.TabIndex = 23;
             this.chksysAgentEnabled.Text = "启用系统代理(privoxy)(本地监听必须要有socks协议,端口+1000)";
             this.chksysAgentEnabled.UseVisualStyleBackColor = true;
@@ -504,10 +506,11 @@
             this.tabPage6.Controls.Add(this.label7);
             this.tabPage6.Controls.Add(this.txtKcpmtu);
             this.tabPage6.Controls.Add(this.label6);
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Location = new System.Drawing.Point(4, 25);
+            this.tabPage6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(520, 470);
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage6.Size = new System.Drawing.Size(696, 591);
             this.tabPage6.TabIndex = 2;
             this.tabPage6.Text = "  KCP设置  ";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -515,106 +518,119 @@
             // chkKcpcongestion
             // 
             this.chkKcpcongestion.AutoSize = true;
-            this.chkKcpcongestion.Location = new System.Drawing.Point(20, 143);
+            this.chkKcpcongestion.Location = new System.Drawing.Point(27, 179);
+            this.chkKcpcongestion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkKcpcongestion.Name = "chkKcpcongestion";
-            this.chkKcpcongestion.Size = new System.Drawing.Size(84, 16);
+            this.chkKcpcongestion.Size = new System.Drawing.Size(109, 19);
             this.chkKcpcongestion.TabIndex = 20;
             this.chkKcpcongestion.Text = "congestion";
             this.chkKcpcongestion.UseVisualStyleBackColor = true;
             // 
             // txtKcpwriteBufferSize
             // 
-            this.txtKcpwriteBufferSize.Location = new System.Drawing.Point(345, 100);
+            this.txtKcpwriteBufferSize.Location = new System.Drawing.Point(460, 125);
+            this.txtKcpwriteBufferSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtKcpwriteBufferSize.Name = "txtKcpwriteBufferSize";
-            this.txtKcpwriteBufferSize.Size = new System.Drawing.Size(94, 21);
+            this.txtKcpwriteBufferSize.Size = new System.Drawing.Size(124, 25);
             this.txtKcpwriteBufferSize.TabIndex = 15;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(236, 104);
+            this.label10.Location = new System.Drawing.Point(315, 130);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(95, 12);
+            this.label10.Size = new System.Drawing.Size(127, 15);
             this.label10.TabIndex = 14;
             this.label10.Text = "writeBufferSize";
             // 
             // txtKcpreadBufferSize
             // 
-            this.txtKcpreadBufferSize.Location = new System.Drawing.Point(111, 100);
+            this.txtKcpreadBufferSize.Location = new System.Drawing.Point(148, 125);
+            this.txtKcpreadBufferSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtKcpreadBufferSize.Name = "txtKcpreadBufferSize";
-            this.txtKcpreadBufferSize.Size = new System.Drawing.Size(94, 21);
+            this.txtKcpreadBufferSize.Size = new System.Drawing.Size(124, 25);
             this.txtKcpreadBufferSize.TabIndex = 13;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(18, 104);
+            this.label11.Location = new System.Drawing.Point(24, 130);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(89, 12);
+            this.label11.Size = new System.Drawing.Size(119, 15);
             this.label11.TabIndex = 12;
             this.label11.Text = "readBufferSize";
             // 
             // txtKcpdownlinkCapacity
             // 
-            this.txtKcpdownlinkCapacity.Location = new System.Drawing.Point(345, 62);
+            this.txtKcpdownlinkCapacity.Location = new System.Drawing.Point(460, 78);
+            this.txtKcpdownlinkCapacity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtKcpdownlinkCapacity.Name = "txtKcpdownlinkCapacity";
-            this.txtKcpdownlinkCapacity.Size = new System.Drawing.Size(94, 21);
+            this.txtKcpdownlinkCapacity.Size = new System.Drawing.Size(124, 25);
             this.txtKcpdownlinkCapacity.TabIndex = 11;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(236, 66);
+            this.label8.Location = new System.Drawing.Point(315, 82);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(101, 12);
+            this.label8.Size = new System.Drawing.Size(135, 15);
             this.label8.TabIndex = 10;
             this.label8.Text = "downlinkCapacity";
             // 
             // txtKcpuplinkCapacity
             // 
-            this.txtKcpuplinkCapacity.Location = new System.Drawing.Point(111, 62);
+            this.txtKcpuplinkCapacity.Location = new System.Drawing.Point(148, 78);
+            this.txtKcpuplinkCapacity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtKcpuplinkCapacity.Name = "txtKcpuplinkCapacity";
-            this.txtKcpuplinkCapacity.Size = new System.Drawing.Size(94, 21);
+            this.txtKcpuplinkCapacity.Size = new System.Drawing.Size(124, 25);
             this.txtKcpuplinkCapacity.TabIndex = 9;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(18, 66);
+            this.label9.Location = new System.Drawing.Point(24, 82);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 12);
+            this.label9.Size = new System.Drawing.Size(119, 15);
             this.label9.TabIndex = 8;
             this.label9.Text = "uplinkCapacity";
             // 
             // txtKcptti
             // 
-            this.txtKcptti.Location = new System.Drawing.Point(345, 24);
+            this.txtKcptti.Location = new System.Drawing.Point(460, 30);
+            this.txtKcptti.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtKcptti.Name = "txtKcptti";
-            this.txtKcptti.Size = new System.Drawing.Size(94, 21);
+            this.txtKcptti.Size = new System.Drawing.Size(124, 25);
             this.txtKcptti.TabIndex = 7;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(236, 28);
+            this.label7.Location = new System.Drawing.Point(315, 35);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(23, 12);
+            this.label7.Size = new System.Drawing.Size(31, 15);
             this.label7.TabIndex = 6;
             this.label7.Text = "tti";
             // 
             // txtKcpmtu
             // 
-            this.txtKcpmtu.Location = new System.Drawing.Point(111, 24);
+            this.txtKcpmtu.Location = new System.Drawing.Point(148, 30);
+            this.txtKcpmtu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtKcpmtu.Name = "txtKcpmtu";
-            this.txtKcpmtu.Size = new System.Drawing.Size(94, 21);
+            this.txtKcpmtu.Size = new System.Drawing.Size(124, 25);
             this.txtKcpmtu.TabIndex = 5;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 28);
+            this.label6.Location = new System.Drawing.Point(24, 35);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(23, 12);
+            this.label6.Size = new System.Drawing.Size(31, 15);
             this.label6.TabIndex = 4;
             this.label6.Text = "mtu";
             // 
@@ -649,24 +665,23 @@
             this.panel1.Size = new System.Drawing.Size(704, 12);
             this.panel1.TabIndex = 9;
             // 
-            // txtPACServerPort
+            // txtPACPort
             // 
-            this.txtPACServerPort.Location = new System.Drawing.Point(165, 117);
-            this.txtPACServerPort.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPACServerPort.Name = "txtPACServerPort";
-            this.txtPACServerPort.Size = new System.Drawing.Size(103, 25);
-            this.txtPACServerPort.TabIndex = 25;
-            this.txtPACServerPort.Text = "8888";
+            this.txtPACPort.Location = new System.Drawing.Point(165, 152);
+            this.txtPACPort.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPACPort.Name = "txtPACPort";
+            this.txtPACPort.Size = new System.Drawing.Size(103, 25);
+            this.txtPACPort.TabIndex = 25;
             // 
-            // label6
+            // label12
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(51, 122);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(106, 15);
-            this.label6.TabIndex = 24;
-            this.label6.Text = "PAC服务器端口";
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(51, 157);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(91, 15);
+            this.label12.TabIndex = 24;
+            this.label12.Text = "PAC监听端口";
             // 
             // OptionSettingForm
             // 
@@ -740,8 +755,7 @@
         private System.Windows.Forms.TextBox txtUserdirect;
         private System.Windows.Forms.TextBox txtUserblock;
         private System.Windows.Forms.CheckBox chkAutoSyncTime;
-        private System.Windows.Forms.TextBox txtPACServerPort;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox chksysAgentEnabled;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.TextBox txtKcpmtu;
         private System.Windows.Forms.Label label6;
@@ -756,5 +770,7 @@
         private System.Windows.Forms.TextBox txtKcpuplinkCapacity;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox chkKcpcongestion;
+        private System.Windows.Forms.TextBox txtPACPort;
+        private System.Windows.Forms.Label label12;
     }
 }
