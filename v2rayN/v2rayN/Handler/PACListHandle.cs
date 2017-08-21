@@ -55,11 +55,11 @@ namespace v2rayN.Handler
                 string abpContent = Utils.UnGzip(Resources.abp_js);
                 abpContent = abpContent.Replace("__RULES__", JsonConvert.SerializeObject(lines, Formatting.Indented));
                 File.WriteAllText(PACServerHandle.PAC_FILE, abpContent, Encoding.UTF8);
-                UpdateCompleted?.Invoke(this, new ResultEventArgs(true));
+                if (UpdateCompleted != null) UpdateCompleted(this, new ResultEventArgs(true));
             }
             catch (Exception ex)
             {
-                Error?.Invoke(this, new ErrorEventArgs(ex));
+                if (Error != null) Error(this, new ErrorEventArgs(ex));
             }
         }
 

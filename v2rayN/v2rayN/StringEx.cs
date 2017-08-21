@@ -9,10 +9,14 @@ namespace v2rayN
     static class StringEx
     {
         public static bool IsNullOrEmpty(this string value)
-            => string.IsNullOrEmpty(value);
+        {
+            return string.IsNullOrEmpty(value);
+        }
 
         public static bool IsNullOrWhiteSpace(this string value)
-            => string.IsNullOrWhiteSpace(value);
+        {
+            return string.IsNullOrWhiteSpace(value);
+        }
 
         public static bool BeginWithAny(this string s, IEnumerable<char> chars)
         {

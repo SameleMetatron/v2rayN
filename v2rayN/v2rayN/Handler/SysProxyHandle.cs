@@ -63,8 +63,10 @@ namespace v2rayN.Handler
             if (enable)
             {
                 arguments = global
-                    ? $"global {proxyServer} <local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*"
-                    : $"pac {pacURL}";
+                    ? string.Format(
+                        "global {0} <local>;localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;172.32.*;192.168.*",
+                        proxyServer)
+                    : string.Format("pac {0}", pacURL);
             }
             else
             {
@@ -73,7 +75,7 @@ namespace v2rayN.Handler
                 var proxy_server = _userSettings.ProxyServer ?? "-";
                 var bypass_list = _userSettings.BypassList ?? "-";
                 var pac_url = _userSettings.PacUrl ?? "-";
-                arguments = $"set {flags} {proxy_server} {bypass_list} {pac_url}";
+                arguments = string.Format("set {0} {1} {2} {3}", flags, proxy_server, bypass_list, pac_url);
 
                 // have to get new settings
                 _userSettings.UserSettingsRecorded = false;

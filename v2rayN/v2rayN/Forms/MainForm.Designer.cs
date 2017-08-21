@@ -114,7 +114,7 @@
             this.cmsMain.Name = "contextMenuStrip1";
             this.cmsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.cmsMain.ShowImageMargin = false;
-            this.cmsMain.Size = new System.Drawing.Size(151, 224);
+            this.cmsMain.Size = new System.Drawing.Size(209, 224);
             // 
             // menuProxyList
             // 
@@ -124,7 +124,7 @@
             this.toolStripMenuItem2,
             this.menuKeep});
             this.menuProxyList.Name = "menuProxyList";
-            this.menuProxyList.Size = new System.Drawing.Size(150, 24);
+            this.menuProxyList.Size = new System.Drawing.Size(208, 24);
             this.menuProxyList.Text = "系统代理模式";
             // 
             // menuGlobal
@@ -156,61 +156,62 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(147, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(205, 6);
             // 
             // menuOpenMain
             // 
             this.menuOpenMain.Name = "menuOpenMain";
-            this.menuOpenMain.Size = new System.Drawing.Size(150, 24);
+            this.menuOpenMain.Size = new System.Drawing.Size(208, 24);
             this.menuOpenMain.Text = "打开主窗口";
             this.menuOpenMain.Click += new System.EventHandler(this.menuOpenMain_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(147, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(205, 6);
             // 
             // menuServers
             // 
             this.menuServers.Name = "menuServers";
-            this.menuServers.Size = new System.Drawing.Size(150, 24);
+            this.menuServers.Size = new System.Drawing.Size(208, 24);
             this.menuServers.Text = "服务器";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(147, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(205, 6);
             // 
             // menuUpdate
             // 
             this.menuUpdate.Name = "menuUpdate";
-            this.menuUpdate.Size = new System.Drawing.Size(150, 24);
+            this.menuUpdate.Size = new System.Drawing.Size(208, 24);
             this.menuUpdate.Text = "检查更新";
             this.menuUpdate.Click += new System.EventHandler(this.menuUpdate_Click);
             // 
             // menuUpdatePACList
             // 
+            this.menuUpdatePACList.Enabled = false;
             this.menuUpdatePACList.Name = "menuUpdatePACList";
-            this.menuUpdatePACList.Size = new System.Drawing.Size(150, 24);
-            this.menuUpdatePACList.Text = "更新PACList";
+            this.menuUpdatePACList.Size = new System.Drawing.Size(208, 24);
+            this.menuUpdatePACList.Text = "更新PACList(暂不可用)";
             this.menuUpdatePACList.Click += new System.EventHandler(this.menuUpdatePACList_Click);
             // 
             // menuAbout
             // 
             this.menuAbout.Name = "menuAbout";
-            this.menuAbout.Size = new System.Drawing.Size(150, 24);
+            this.menuAbout.Size = new System.Drawing.Size(208, 24);
             this.menuAbout.Text = "关于";
             this.menuAbout.Click += new System.EventHandler(this.menuAbout_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(147, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(205, 6);
             // 
             // menuExit
             // 
             this.menuExit.Name = "menuExit";
-            this.menuExit.Size = new System.Drawing.Size(150, 24);
+            this.menuExit.Size = new System.Drawing.Size(208, 24);
             this.menuExit.Text = "退出";
             this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
             // 

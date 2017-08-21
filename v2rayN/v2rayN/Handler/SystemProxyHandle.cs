@@ -50,7 +50,8 @@ namespace v2rayN.Handler
                     }
                     else
                     {
-                        string pacUrl = $"http://127.0.0.1:{config.sysListenerPort}/pac/?t={GetTimestamp(DateTime.Now)}";
+                        string pacUrl = string.Format("http://127.0.0.1:{0}/pac/?t={1}", config.sysListenerPort,
+                            GetTimestamp(DateTime.Now));
                         SysProxyHandle.SetIEProxy(true, false, null, pacUrl);
                         PACServerHandle.Init(config);
                         PACFileWatcherHandle.StartWatch(config);

@@ -6,6 +6,8 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using v2rayN.Mode;
+using v2rayN.Properties;
+using v2rayN.Tool;
 
 namespace v2rayN.Handler
 {
@@ -18,7 +20,7 @@ namespace v2rayN.Handler
         public static void Init(Config config)
         {
             pacLinstener = new HttpListener(); //创建监听实例  
-            pacLinstener.Prefixes.Add($"http://127.0.0.1:{config.sysListenerPort}/pac/"); //添加监听地址 注意是以/结尾。  
+            pacLinstener.Prefixes.Add(string.Format("http://127.0.0.1:{0}/pac/", config.sysListenerPort)); //添加监听地址 注意是以/结尾。  
             pacLinstener.Start(); //允许该监听地址接受请求的传入。  
             Thread threadpacLinstener = new Thread(new ParameterizedThreadStart(GetPacList)); //创建开启一个线程监听该地址得请求  
             threadpacLinstener.IsBackground = true;
@@ -39,7 +41,7 @@ namespace v2rayN.Handler
         {
             var cfg = config as Config;
             var httpProxy = cfg.inbound.FirstOrDefault(x => x.protocol == "http");
-            var proxy = $"PROXY 127.0.0.1:{httpProxy.localPort};";
+            var proxy = string.Format("PROXY 127.0.0.1:{0};", httpProxy.localPort);
             while (pacLinstener != null && pacLinstener.IsListening)
             {
                 HttpListenerContext requestContext = null;
@@ -54,7 +56,9 @@ namespace v2rayN.Handler
                         requestContext.Response.ContentEncoding = Encoding.UTF8;
                         if (!File.Exists(PAC_FILE))
                         {
-                            new PACListHandle().UpdatePACFromGFWList(cfg);
+                            //TODO:暂时没解决更新PAC列表的问题，用直接解压现有PAC解决
+                            //new PACListHandle().UpdatePACFromGFWList(cfg);
+                            FileManager.UncompressFile("./pac.txt", Resources.pac_txt);
                         }
                         var pac = File.ReadAllText(PAC_FILE, Encoding.UTF8);
                         pac = pac.Replace("__PROXY__", proxy);
