@@ -506,11 +506,11 @@ namespace v2rayN
         /// <returns></returns>
         public static int GetHttpPortNum(Config config)
         {
-            var httpProxy = config.inbound.FirstOrDefault(x => x.protocol == "http");
-            if (httpProxy != null)
-            {
-                return httpProxy.localPort;
-            }
+            //var httpProxy = config.inbound.FirstOrDefault(x => x.protocol == "http");
+            //if (httpProxy != null)
+            //{
+            //    return httpProxy.localPort;
+            //}
             if (PrivoxyHandler.Instance.IsRunning)
             {
                 return PrivoxyHandler.Instance.RunningPort;

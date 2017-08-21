@@ -75,11 +75,11 @@ namespace v2rayN.Mode
         public bool sysAgentEnabled { get; set; }
 
         public KcpItem kcpItem { get; set; }
-        
+
         /// <summary>
-        /// 监听端口号
+        /// PAC监听端口号
         /// </summary>
-        public int sysListenerPort { get; set; }
+        public int pacPort { get; set; }
 
         /// <summary>
         /// 监听状态 0-不改变 1-全局 2-PAC

@@ -40,7 +40,7 @@ namespace v2rayN.Handler
                 config.muxEnabled = true;
 
                 //默认监听端口
-                config.sysListenerPort = 8888;
+                config.pacPort = 8888;
             }
 
             //本地监听
@@ -54,12 +54,20 @@ namespace v2rayN.Handler
 
                 config.inbound.Add(inItem);
 
-                inItem = new InItem();
-                inItem.protocol = "http";
-                inItem.localPort = 1081;
-                inItem.udpEnabled = true;
+                //inItem = new InItem();
+                //inItem.protocol = "http";
+                //inItem.localPort = 1081;
+                //inItem.udpEnabled = true;
 
-                config.inbound.Add(inItem);
+                //config.inbound.Add(inItem);
+            }
+            else
+            {
+                //http协议不由core提供,只保留socks
+                if (config.inbound.Count > 0)
+                {
+                    config.inbound[0].protocol = "socks";
+                }
             }
             //路由规则
             if (config.useragent == null)
@@ -88,9 +96,9 @@ namespace v2rayN.Handler
             }
 
             // 如果是用户升级，首次会有端口号为0的情况，不可用，这里处理
-            if (config.sysListenerPort == 0)
+            if (config.pacPort == 0)
             {
-                config.sysListenerPort = 8888;
+                config.pacPort = 8888;
             }
 
             if (config == null

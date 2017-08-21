@@ -20,7 +20,7 @@ namespace v2rayN.Handler
         public static void Init(Config config)
         {
             pacLinstener = new HttpListener(); //创建监听实例  
-            pacLinstener.Prefixes.Add(string.Format("http://127.0.0.1:{0}/pac/", config.sysListenerPort)); //添加监听地址 注意是以/结尾。  
+            pacLinstener.Prefixes.Add(string.Format("http://127.0.0.1:{0}/pac/", config.pacPort)); //添加监听地址 注意是以/结尾。  
             pacLinstener.Start(); //允许该监听地址接受请求的传入。  
             Thread threadpacLinstener = new Thread(new ParameterizedThreadStart(GetPacList)); //创建开启一个线程监听该地址得请求  
             threadpacLinstener.IsBackground = true;
@@ -41,6 +41,10 @@ namespace v2rayN.Handler
         {
             var cfg = config as Config;
             var port = Utils.GetHttpPortNum(cfg);
+            if (port == -1)
+            {
+                return;
+            }
             var proxy = string.Format("PROXY 127.0.0.1:{0};", port);
             while (pacLinstener != null && pacLinstener.IsListening)
             {

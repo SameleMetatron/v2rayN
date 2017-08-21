@@ -28,11 +28,11 @@ namespace v2rayN.Forms
             {
                 if (args.Success)
                 {
-                    v2rayHandler_ProcessEvent(true, "PACList更新成功！");
+                    v2rayHandler_ProcessEvent(false, "PAC更新成功！");
                 }
                 else
                 {
-                    v2rayHandler_ProcessEvent(true, "PACList更新失败！");
+                    v2rayHandler_ProcessEvent(false, "PAC更新失败！");
                 }
             };
             pacListHandle.Error += (sender, args) =>
@@ -51,8 +51,6 @@ namespace v2rayN.Forms
             ConfigHandler.LoadConfig(ref config);
             v2rayHandler = new V2rayHandler();
             v2rayHandler.ProcessEvent += v2rayHandler_ProcessEvent;
-
-            ChangePACButtonStatus(config.listenerType);
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -67,6 +65,8 @@ namespace v2rayN.Forms
             {
                 CDateTime.SetLocalTime();
             }
+
+            ChangePACButtonStatus(config.listenerType);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

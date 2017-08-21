@@ -99,7 +99,9 @@
     <Compile Include="Handler\SystemProxyHandle.cs" />
     <Compile Include="Mode\EMove.cs" />
     <Compile Include="Mode\SysproxyConfig.cs" />
-    <Compile Include="StringEx.cs" />
+    <Compile Include="StringEx.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tool\CDateTime.cs" />
     <Compile Include="Forms\AddServerForm.cs">
       <SubType>Form</SubType>

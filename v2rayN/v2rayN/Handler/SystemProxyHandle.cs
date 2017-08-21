@@ -50,7 +50,7 @@ namespace v2rayN.Handler
                     }
                     else
                     {
-                        string pacUrl = string.Format("http://127.0.0.1:{0}/pac/?t={1}", config.sysListenerPort,
+                        string pacUrl = string.Format("http://127.0.0.1:{0}/pac/?t={1}", config.pacPort,
                             GetTimestamp(DateTime.Now));
                         SysProxyHandle.SetIEProxy(true, false, null, pacUrl);
                         PACServerHandle.Init(config);
