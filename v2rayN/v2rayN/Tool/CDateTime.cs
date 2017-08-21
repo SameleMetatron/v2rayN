@@ -14,54 +14,53 @@ namespace v2rayN
         /// </summary>
         public static void SetLocalTime()
         {
+            using (WebClient wc = new WebClient())
+            {
+                //网上免费的api，每日可调用1000次
+                string url = @"http://api.avatardata.cn/BeijingTime/LookUp?key=78853e1339ac43f78c8ed7844579fabc";
+                string result = string.Empty;
+
+                try
+                {
+                    wc.Encoding = Encoding.UTF8;
+                    wc.DownloadStringCompleted += wc_DownloadStringCompleted;
+                    wc.DownloadStringAsync(new Uri(url));
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        static void wc_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
             try
             {
-                DateTime dtWeb = GetWebTime();
-                SYSTEMTIME st = new SYSTEMTIME();
-                st.FromDateTime(dtWeb);
+                string result = e.Result;
+                if (Utils.IsNullOrEmpty(result))
+                {
+                    return;
+                }
+                EWebTime webTime = Utils.FromJson<EWebTime>(result);
+                if (webTime != null
+                    && webTime.result != null
+                    && webTime.result.stime != null
+                    && !Utils.IsNullOrEmpty(webTime.result.stime))
+                {
+                    DateTime dtWeb = GetTimeFromLinux(webTime.result.stime);
 
-                //调用Win32 API设置系统时间
-                Win32API.SetLocalTime(ref st);
+                    SYSTEMTIME st = new SYSTEMTIME();
+                    st.FromDateTime(dtWeb);
+
+                    //调用Win32 API设置系统时间
+                    Win32API.SetLocalTime(ref st);
+                }
             }
             catch
             {
             }
         }
 
-        /// <summary>
-        /// 从网上同步时间
-        /// </summary>
-        private static DateTime GetWebTime()
-        {
-            using (WebClient wc = new WebClient())
-            {
-                //网上免费的api，每日可调用1000次
-                string url = @"http://api.avatardata.cn/BeijingTime/LookUp?key=632b1c3bedba4fa4be967027d937db59";
-                string result = string.Empty;
-
-                try
-                {
-                    wc.Encoding = Encoding.UTF8;
-                    result = wc.DownloadString(new Uri(url));
-                    if (!Utils.IsNullOrEmpty(result))
-                    {
-                        EWebTime webTime = Utils.FromJson<EWebTime>(result);
-                        if (webTime != null
-                            && webTime.result != null
-                            && webTime.result.stime != null
-                            && !Utils.IsNullOrEmpty(webTime.result.stime))
-                        {
-                            DateTime dtWeb = GetTimeFromLinux(webTime.result.stime);
-                            return dtWeb;
-                        }
-                    }
-                }
-                catch
-                {
-                }
-            }
-            return DateTime.Now;
-        }
         /// <summary>
         /// 时间戳转为C#格式时间
         /// </summary>

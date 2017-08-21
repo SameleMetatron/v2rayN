@@ -346,27 +346,27 @@ namespace v2rayN.Handler
                     //kcp基本配置暂时是默认值，用户能自己设置伪装类型
                     case "kcp":
                         KcpSettings kcpSettings = new KcpSettings();
-                        kcpSettings.mtu = 1350;
-                        kcpSettings.tti = 50;
+                        kcpSettings.mtu = config.kcpItem.mtu;
+                        kcpSettings.tti = config.kcpItem.tti;
                         if (iobound.Equals("out"))
                         {
-                            kcpSettings.uplinkCapacity = 12;
-                            kcpSettings.downlinkCapacity = 100;
+                            kcpSettings.uplinkCapacity = config.kcpItem.uplinkCapacity;
+                            kcpSettings.downlinkCapacity = config.kcpItem.downlinkCapacity;
                         }
                         else if (iobound.Equals("in"))
                         {
-                            kcpSettings.uplinkCapacity = 100;
-                            kcpSettings.downlinkCapacity = 100;
+                            kcpSettings.uplinkCapacity = config.kcpItem.downlinkCapacity; ;
+                            kcpSettings.downlinkCapacity = config.kcpItem.downlinkCapacity;
                         }
                         else
                         {
-                            kcpSettings.uplinkCapacity = 12;
-                            kcpSettings.downlinkCapacity = 100;
+                            kcpSettings.uplinkCapacity = config.kcpItem.uplinkCapacity;
+                            kcpSettings.downlinkCapacity = config.kcpItem.downlinkCapacity;
                         }
 
-                        kcpSettings.congestion = false;
-                        kcpSettings.readBufferSize = 2;
-                        kcpSettings.writeBufferSize = 2;
+                        kcpSettings.congestion = config.kcpItem.congestion;
+                        kcpSettings.readBufferSize = config.kcpItem.readBufferSize;
+                        kcpSettings.writeBufferSize = config.kcpItem.writeBufferSize;
                         kcpSettings.header = new Header();
                         kcpSettings.header.type = config.headerType();
                         streamSettings.kcpSettings = kcpSettings;
@@ -389,7 +389,7 @@ namespace v2rayN.Handler
 
                             //request填入自定义Host
                             string request = Utils.GetEmbedText(Global.v2raySampleHttprequestFileName);
-                            string[] arrHost = config.requestHost().Split(',');
+                            string[] arrHost = config.requestHost().Replace(" ", "").Split(',');
                             string host = string.Join("\",\"", arrHost);
                             request = request.Replace("$requestHost$", string.Format("\"{0}\"", host));
                             //request = request.Replace("$requestHost$", string.Format("\"{0}\"", config.requestHost()));

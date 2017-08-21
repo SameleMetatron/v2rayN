@@ -32,6 +32,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chksysAgentEnabled = new System.Windows.Forms.CheckBox();
             this.chkAutoSyncTime = new System.Windows.Forms.CheckBox();
             this.chkAutoRun = new System.Windows.Forms.CheckBox();
             this.chkmuxEnabled = new System.Windows.Forms.CheckBox();
@@ -60,6 +61,20 @@
             this.txtUserblock = new System.Windows.Forms.TextBox();
             this.chkBypassChinasites = new System.Windows.Forms.CheckBox();
             this.chkBypassChinaip = new System.Windows.Forms.CheckBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.chkKcpcongestion = new System.Windows.Forms.CheckBox();
+            this.txtKcpwriteBufferSize = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtKcpreadBufferSize = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtKcpdownlinkCapacity = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtKcpuplinkCapacity = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtKcptti = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtKcpmtu = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnOK = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -74,6 +89,7 @@
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,6 +109,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 12);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -141,6 +158,18 @@
             this.groupBox1.Size = new System.Drawing.Size(688, 584);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
+            // 
+            // chksysAgentEnabled
+            // 
+            this.chksysAgentEnabled.AutoSize = true;
+            this.chksysAgentEnabled.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chksysAgentEnabled.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chksysAgentEnabled.Location = new System.Drawing.Point(13, 100);
+            this.chksysAgentEnabled.Name = "chksysAgentEnabled";
+            this.chksysAgentEnabled.Size = new System.Drawing.Size(412, 16);
+            this.chksysAgentEnabled.TabIndex = 23;
+            this.chksysAgentEnabled.Text = "启用系统代理(privoxy)(本地监听必须要有socks协议,端口+1000)";
+            this.chksysAgentEnabled.UseVisualStyleBackColor = true;
             // 
             // chkAutoSyncTime
             // 
@@ -460,6 +489,135 @@
             this.chkBypassChinaip.Text = "绕过大陆IP";
             this.chkBypassChinaip.UseVisualStyleBackColor = true;
             // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.chkKcpcongestion);
+            this.tabPage6.Controls.Add(this.txtKcpwriteBufferSize);
+            this.tabPage6.Controls.Add(this.label10);
+            this.tabPage6.Controls.Add(this.txtKcpreadBufferSize);
+            this.tabPage6.Controls.Add(this.label11);
+            this.tabPage6.Controls.Add(this.txtKcpdownlinkCapacity);
+            this.tabPage6.Controls.Add(this.label8);
+            this.tabPage6.Controls.Add(this.txtKcpuplinkCapacity);
+            this.tabPage6.Controls.Add(this.label9);
+            this.tabPage6.Controls.Add(this.txtKcptti);
+            this.tabPage6.Controls.Add(this.label7);
+            this.tabPage6.Controls.Add(this.txtKcpmtu);
+            this.tabPage6.Controls.Add(this.label6);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(520, 470);
+            this.tabPage6.TabIndex = 2;
+            this.tabPage6.Text = "  KCP设置  ";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // chkKcpcongestion
+            // 
+            this.chkKcpcongestion.AutoSize = true;
+            this.chkKcpcongestion.Location = new System.Drawing.Point(20, 143);
+            this.chkKcpcongestion.Name = "chkKcpcongestion";
+            this.chkKcpcongestion.Size = new System.Drawing.Size(84, 16);
+            this.chkKcpcongestion.TabIndex = 20;
+            this.chkKcpcongestion.Text = "congestion";
+            this.chkKcpcongestion.UseVisualStyleBackColor = true;
+            // 
+            // txtKcpwriteBufferSize
+            // 
+            this.txtKcpwriteBufferSize.Location = new System.Drawing.Point(345, 100);
+            this.txtKcpwriteBufferSize.Name = "txtKcpwriteBufferSize";
+            this.txtKcpwriteBufferSize.Size = new System.Drawing.Size(94, 21);
+            this.txtKcpwriteBufferSize.TabIndex = 15;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(236, 104);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(95, 12);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "writeBufferSize";
+            // 
+            // txtKcpreadBufferSize
+            // 
+            this.txtKcpreadBufferSize.Location = new System.Drawing.Point(111, 100);
+            this.txtKcpreadBufferSize.Name = "txtKcpreadBufferSize";
+            this.txtKcpreadBufferSize.Size = new System.Drawing.Size(94, 21);
+            this.txtKcpreadBufferSize.TabIndex = 13;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(18, 104);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(89, 12);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "readBufferSize";
+            // 
+            // txtKcpdownlinkCapacity
+            // 
+            this.txtKcpdownlinkCapacity.Location = new System.Drawing.Point(345, 62);
+            this.txtKcpdownlinkCapacity.Name = "txtKcpdownlinkCapacity";
+            this.txtKcpdownlinkCapacity.Size = new System.Drawing.Size(94, 21);
+            this.txtKcpdownlinkCapacity.TabIndex = 11;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(236, 66);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(101, 12);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "downlinkCapacity";
+            // 
+            // txtKcpuplinkCapacity
+            // 
+            this.txtKcpuplinkCapacity.Location = new System.Drawing.Point(111, 62);
+            this.txtKcpuplinkCapacity.Name = "txtKcpuplinkCapacity";
+            this.txtKcpuplinkCapacity.Size = new System.Drawing.Size(94, 21);
+            this.txtKcpuplinkCapacity.TabIndex = 9;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(18, 66);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(89, 12);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "uplinkCapacity";
+            // 
+            // txtKcptti
+            // 
+            this.txtKcptti.Location = new System.Drawing.Point(345, 24);
+            this.txtKcptti.Name = "txtKcptti";
+            this.txtKcptti.Size = new System.Drawing.Size(94, 21);
+            this.txtKcptti.TabIndex = 7;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(236, 28);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(23, 12);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "tti";
+            // 
+            // txtKcpmtu
+            // 
+            this.txtKcpmtu.Location = new System.Drawing.Point(111, 24);
+            this.txtKcpmtu.Name = "txtKcpmtu";
+            this.txtKcpmtu.Size = new System.Drawing.Size(94, 21);
+            this.txtKcpmtu.TabIndex = 5;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(18, 28);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(23, 12);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "mtu";
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.btnClose);
@@ -538,6 +696,8 @@
             this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -582,5 +742,19 @@
         private System.Windows.Forms.CheckBox chkAutoSyncTime;
         private System.Windows.Forms.TextBox txtPACServerPort;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TextBox txtKcpmtu;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtKcptti;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtKcpwriteBufferSize;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtKcpreadBufferSize;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtKcpdownlinkCapacity;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtKcpuplinkCapacity;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox chkKcpcongestion;
     }
 }

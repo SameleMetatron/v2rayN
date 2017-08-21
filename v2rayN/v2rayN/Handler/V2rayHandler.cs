@@ -14,7 +14,6 @@ namespace v2rayN.Handler
     /// <param name="msg">内容</param>
     public delegate void ProcessDelegate(bool notify, string msg);
 
-
     /// <summary>
     /// v2ray进程处理类
     /// </summary>
@@ -23,13 +22,18 @@ namespace v2rayN.Handler
         private static string v2rayConfigRes = Global.v2rayConfigFileName;
         private List<string> lstV2ray;
         public event ProcessDelegate ProcessEvent;
-        private Config config;
+        private PrivoxyHandler privoxyHandler;
 
         public V2rayHandler()
         {
             lstV2ray = new List<string>();
             lstV2ray.Add("wv2ray");
             lstV2ray.Add("v2ray");
+
+            if (privoxyHandler == null)
+            {
+                privoxyHandler = new PrivoxyHandler();
+            }
         }
 
         /// <summary>
@@ -80,13 +84,7 @@ namespace v2rayN.Handler
                     }
                 }
                 //开启全局代理则关闭
-                if (Global.setSysAgent)
-                {
-                    ProxySetting.UnsetProxy();
-                    SystemProxyHandle.Update(config, true);
-                    Global.setSysAgent = false;
-                }
-
+                UnsetSysAgent();
             }
             catch (Exception)
             {
@@ -164,8 +162,61 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         private void SetSysAgent(Config config)
         {
-            SystemProxyHandle.Update(config, false);
-            Global.setSysAgent = true;
+            try
+            {
+                if (!config.sysAgentEnabled)
+                {
+                    return;
+                }
+
+                string localPort = string.Empty;
+                foreach (InItem inItem in config.inbound)
+                {
+                    if (inItem.protocol.Equals("socks"))
+                    {
+                        localPort = string.Format("{0}", inItem.localPort);
+                        break;
+                    }
+                }
+                if (!string.IsNullOrEmpty(localPort) && privoxyHandler != null)
+                {
+                    privoxyHandler.Start(localPort);
+                    if (privoxyHandler.RunningPort > 0)
+                    {
+                        string strProxy = string.Format("127.0.0.1:{0}", privoxyHandler.RunningPort);
+                        ProxySetting.SetProxy(strProxy);
+                        Global.setSysAgent = true;
+
+                        ShowMsg(false, string.Format("正在启用系统代理({0})......", strProxy));
+                    }
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        /// <summary>
+        /// 关闭系统代理
+        /// </summary>
+        private void UnsetSysAgent()
+        {
+            try
+            {
+                //开启全局代理则关闭
+                if (Global.setSysAgent)
+                {
+                    ProxySetting.UnsetProxy();
+                    if (privoxyHandler != null)
+                    {
+                        privoxyHandler.Stop();
+                    }
+                    Global.setSysAgent = false;
+                }
+            }
+            catch
+            {
+            }
         }
     }
 }

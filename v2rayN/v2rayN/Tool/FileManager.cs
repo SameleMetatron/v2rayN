@@ -1,14 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Text;
 
-namespace v2rayN.Tool
+namespace v2rayN
 {
-    class FileManager
+    public static class FileManager
     {
+        public static bool ByteArrayToFile(string fileName, byte[] content)
+        {
+            try
+            {
+                using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                    fs.Write(content, 0, content.Length);
+                return true;
+            }
+            catch (Exception ex)
+            {
+            }
+            return false;
+        }
+
         public static void UncompressFile(string fileName, byte[] content)
         {
             // Because the uncompressed size of the file is unknown,
@@ -18,12 +30,33 @@ namespace v2rayN.Tool
 
             using (var fs = File.Create(fileName))
             using (var input = new GZipStream(new MemoryStream(content),
-                CompressionMode.Decompress, false))
+                    CompressionMode.Decompress, false))
             {
                 while ((n = input.Read(buffer, 0, buffer.Length)) > 0)
                 {
                     fs.Write(buffer, 0, n);
                 }
+            }
+        }
+
+        public static string NonExclusiveReadAllText(string path)
+        {
+            return NonExclusiveReadAllText(path, Encoding.Default);
+        }
+
+        public static string NonExclusiveReadAllText(string path, Encoding encoding)
+        {
+            try
+            {
+                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using (var sr = new StreamReader(fs, encoding))
+                {
+                    return sr.ReadToEnd();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }
