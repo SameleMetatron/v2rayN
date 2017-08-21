@@ -60,6 +60,8 @@ namespace v2rayN.Forms
 
             //启用系统代理 
             chksysAgentEnabled.Checked = config.sysAgentEnabled;
+
+            txtPACPort.Text = config.sysListenerPort.ToString();
         }
 
         /// <summary>
@@ -195,6 +197,13 @@ namespace v2rayN.Forms
 
             //启用系统代理 
             config.sysAgentEnabled = chksysAgentEnabled.Checked;
+
+            if (Utils.IsNullOrEmpty(txtPACPort.Text) || !Utils.IsNumberic(txtPACPort.Text))
+            {
+                UI.Show("请填写PAC监听端口");
+                return -1;
+            }
+            config.sysListenerPort = Convert.ToInt32(txtPACPort.Text);
 
             return 0;
         }

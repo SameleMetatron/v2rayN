@@ -38,6 +38,9 @@ namespace v2rayN.Handler
 
                 //Mux
                 config.muxEnabled = true;
+
+                //默认监听端口
+                config.sysListenerPort = 8888;
             }
 
             //本地监听
@@ -47,6 +50,13 @@ namespace v2rayN.Handler
                 InItem inItem = new InItem();
                 inItem.protocol = "socks";
                 inItem.localPort = 1080;
+                inItem.udpEnabled = true;
+
+                config.inbound.Add(inItem);
+
+                inItem = new InItem();
+                inItem.protocol = "http";
+                inItem.localPort = 1081;
                 inItem.udpEnabled = true;
 
                 config.inbound.Add(inItem);
@@ -75,6 +85,12 @@ namespace v2rayN.Handler
                 config.kcpItem.readBufferSize = 2;
                 config.kcpItem.writeBufferSize = 2;
                 config.kcpItem.congestion = false;
+            }
+
+            // 如果是用户升级，首次会有端口号为0的情况，不可用，这里处理
+            if (config.sysListenerPort == 0)
+            {
+                config.sysListenerPort = 8888;
             }
 
             if (config == null

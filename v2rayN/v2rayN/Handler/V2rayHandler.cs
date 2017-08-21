@@ -23,6 +23,7 @@ namespace v2rayN.Handler
         private List<string> lstV2ray;
         public event ProcessDelegate ProcessEvent;
         private PrivoxyHandler privoxyHandler;
+        private Config _config;
 
         public V2rayHandler()
         {
@@ -32,7 +33,7 @@ namespace v2rayN.Handler
 
             if (privoxyHandler == null)
             {
-                privoxyHandler = new PrivoxyHandler();
+                privoxyHandler = PrivoxyHandler.Instance;
             }
         }
 
@@ -41,6 +42,7 @@ namespace v2rayN.Handler
         /// </summary>
         public void LoadV2ray(Config config)
         {
+            _config = config;
             if (Global.reloadV2ray)
             {
                 string msg = string.Empty;
@@ -65,6 +67,7 @@ namespace v2rayN.Handler
         {
             V2rayStop();
             V2rayStart();
+            SystemProxyHandle.ReSetPACProxy(_config);
         }
 
         /// <summary>
@@ -82,7 +85,6 @@ namespace v2rayN.Handler
                         p.Kill();
                     }
                 }
-
                 //开启全局代理则关闭
                 UnsetSysAgent();
             }
@@ -184,7 +186,7 @@ namespace v2rayN.Handler
                     if (privoxyHandler.RunningPort > 0)
                     {
                         string strProxy = string.Format("127.0.0.1:{0}", privoxyHandler.RunningPort);
-                        ProxySetting.SetProxy(strProxy);
+                        //ProxySetting.SetProxy(strProxy);
                         Global.setSysAgent = true;
 
                         ShowMsg(false, string.Format("正在启用系统代理({0})......", strProxy));
@@ -203,10 +205,12 @@ namespace v2rayN.Handler
         {
             try
             {
+                SystemProxyHandle.Update(_config, true);
                 //开启全局代理则关闭
                 if (Global.setSysAgent)
                 {
-                    ProxySetting.UnsetProxy();
+                    //ProxySetting.UnsetProxy();
+                    
                     if (privoxyHandler != null)
                     {
                         privoxyHandler.Stop();

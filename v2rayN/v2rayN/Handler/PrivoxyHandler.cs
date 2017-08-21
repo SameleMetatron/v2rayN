@@ -8,16 +8,23 @@ using System.Text;
 using System.Windows.Forms;
 using v2rayN.Mode;
 using v2rayN.Properties;
+using v2rayN.Tool;
 
 namespace v2rayN.Handler
 {
     class PrivoxyHandler
     {
+        /// <summary>
+        /// 单例
+        /// </summary>
+        private static PrivoxyHandler instance;
+
         private static int _uid;
         private static string _uniqueConfigFile;
         private static Job _privoxyJob;
         private Process _process;
         private int _runningPort;
+        private bool _isRunning;
 
         static PrivoxyHandler()
         {
@@ -36,6 +43,26 @@ namespace v2rayN.Handler
             }
         }
 
+        private PrivoxyHandler()
+        {
+            
+        }
+
+        /// <summary>
+        /// 单例
+        /// </summary>
+        public static PrivoxyHandler Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new PrivoxyHandler();
+                }
+                return instance;
+            }
+        }
+
         public int RunningPort
         {
             get
@@ -43,6 +70,15 @@ namespace v2rayN.Handler
                 return _runningPort;
             }
         }
+
+        public bool IsRunning
+        {
+            get
+            {
+                return _isRunning;
+            }
+        }
+
         public void Start(string localPort)
         {
             if (_process == null)
@@ -79,6 +115,7 @@ namespace v2rayN.Handler
                  * when ss exit unexpectedly, this process will be forced killed by system.
                  */
                 _privoxyJob.AddProcess(_process.Handle);
+                _isRunning = true;
             }
         }
 
@@ -89,6 +126,7 @@ namespace v2rayN.Handler
                 KillProcess(_process);
                 _process.Dispose();
                 _process = null;
+                _isRunning = false;
             }
         }
 

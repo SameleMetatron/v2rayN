@@ -63,6 +63,16 @@ namespace v2rayN.Properties {
         /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
+        internal static byte[] abp_js {
+            get {
+                object obj = ResourceManager.GetObject("abp_js", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
         internal static byte[] mgwz_dll {
             get {
                 object obj = ResourceManager.GetObject("mgwz_dll", resourceCulture);
@@ -87,6 +97,16 @@ namespace v2rayN.Properties {
             get {
                 object obj = ResourceManager.GetObject("option", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] pac_txt {
+            get {
+                object obj = ResourceManager.GetObject("pac_txt", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -133,6 +153,26 @@ namespace v2rayN.Properties {
             get {
                 object obj = ResourceManager.GetObject("server", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] sysproxy_exe {
+            get {
+                object obj = ResourceManager.GetObject("sysproxy_exe", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] sysproxy64_exe {
+            get {
+                object obj = ResourceManager.GetObject("sysproxy64_exe", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

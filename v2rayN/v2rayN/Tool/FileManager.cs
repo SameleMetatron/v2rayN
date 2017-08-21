@@ -3,7 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Text;
 
-namespace v2rayN
+namespace v2rayN.Tool
 {
     public static class FileManager
     {
