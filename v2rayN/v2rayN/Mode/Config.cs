@@ -65,6 +65,11 @@ namespace v2rayN.Mode
         public List<string> userblock { get; set; }
 
         /// <summary>
+        /// KcpItem
+        /// </summary>
+        public KcpItem kcpItem { get; set; }
+
+        /// <summary>
         /// 自动从网络同步本地时间
         /// </summary>
         public bool autoSyncTime { get; set; }
@@ -74,18 +79,16 @@ namespace v2rayN.Mode
         /// </summary>
         public bool sysAgentEnabled { get; set; }
 
-        public KcpItem kcpItem { get; set; }
-
-        /// <summary>
-        /// PAC监听端口号
-        /// </summary>
-        public int pacPort { get; set; }
-
         /// <summary>
         /// 监听状态 0-不改变 1-全局 2-PAC
         /// </summary>
         public int listenerType { get; set; }
-
+                
+        /// <summary>
+        /// 自定义GFWList url
+        /// </summary>
+        public string urlGFWList { get; set; }
+        
         #region 函数
 
         public string address()
@@ -172,6 +175,20 @@ namespace v2rayN.Mode
                 return string.Empty;
             }
             return vmess[index].streamSecurity;
+        }
+
+        public int GetLocalPort(string protocol)
+        {
+            int localPort = 0;
+            foreach (InItem inItem in inbound)
+            {
+                if (inItem.protocol.Equals(protocol))
+                {
+                    localPort = inItem.localPort;
+                    break;
+                }
+            }
+            return localPort;
         }
         #endregion
 

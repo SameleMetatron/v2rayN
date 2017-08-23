@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
 using v2rayN.Mode;
 using v2rayN.Properties;
 
-namespace v2rayN.Handler
+namespace v2rayN.HttpProxyHandler
 {
+    /// <summary>
+    /// 提供PAC功能支持
+    /// </summary>
     class PACListHandle
     {
         public event EventHandler<ResultEventArgs> UpdateCompleted;
@@ -34,6 +36,12 @@ namespace v2rayN.Handler
 
         public void UpdatePACFromGFWList(Config config)
         {
+            string url = GFWLIST_URL;
+            if (!Utils.IsNullOrEmpty(config.urlGFWList))
+            {
+                url = config.urlGFWList;
+            }
+
             //默认用户已开启系统代理
             //var httpProxy = config.inbound.FirstOrDefault(x => x.protocol=="http");
             //if (httpProxy == null)
@@ -44,7 +52,7 @@ namespace v2rayN.Handler
             //http.Headers.Add("Connection", "Close");
             //http.Proxy = new WebProxy(IPAddress.Loopback.ToString(), httpProxy.localPort);
             http.DownloadStringCompleted += http_DownloadStringCompleted;
-            http.DownloadStringAsync(new Uri(GFWLIST_URL));
+            http.DownloadStringAsync(new Uri(url));
         }
 
         private void http_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)

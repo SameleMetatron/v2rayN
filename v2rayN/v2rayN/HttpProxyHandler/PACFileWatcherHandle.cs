@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Windows.Forms;
 using v2rayN.Mode;
 
-namespace v2rayN.Handler
+namespace v2rayN.HttpProxyHandler
 {
+    /// <summary>
+    /// 提供PAC功能支持
+    /// </summary>
     class PACFileWatcherHandle
     {
         private static FileSystemWatcher fileSystemWatcher;
@@ -27,7 +26,7 @@ namespace v2rayN.Handler
                     if (fileSize != fileInfo.Length)
                     {
                         fileSize = fileInfo.Length;
-                        SystemProxyHandle.ReSetPACProxy(config);
+                        HttpProxyHandle.ReSetPACProxy(config);
                     }
                     
                 };

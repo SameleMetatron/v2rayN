@@ -39,8 +39,8 @@ namespace v2rayN.Handler
                 //Mux
                 config.muxEnabled = true;
 
-                //默认监听端口
-                config.pacPort = 8888;
+                ////默认监听端口
+                //config.pacPort = 8888;
             }
 
             //本地监听
@@ -95,11 +95,11 @@ namespace v2rayN.Handler
                 config.kcpItem.congestion = false;
             }
 
-            // 如果是用户升级，首次会有端口号为0的情况，不可用，这里处理
-            if (config.pacPort == 0)
-            {
-                config.pacPort = 8888;
-            }
+            //// 如果是用户升级，首次会有端口号为0的情况，不可用，这里处理
+            //if (config.pacPort == 0)
+            //{
+            //    config.pacPort = 8888;
+            //}
 
             if (config == null
                 || config.index < 0

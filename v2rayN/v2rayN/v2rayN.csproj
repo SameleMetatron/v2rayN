@@ -91,12 +91,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Handler\PACFileWatcherHandle.cs" />
-    <Compile Include="Handler\PrivoxyHandler.cs" />
-    <Compile Include="Handler\PACListHandle.cs" />
-    <Compile Include="Handler\PACServerHandle.cs" />
-    <Compile Include="Handler\SysProxyHandle.cs" />
-    <Compile Include="Handler\SystemProxyHandle.cs" />
+    <Compile Include="HttpProxyHandler\PACFileWatcherHandle.cs" />
+    <Compile Include="HttpProxyHandler\PrivoxyHandler.cs" />
+    <Compile Include="HttpProxyHandler\PACListHandle.cs" />
+    <Compile Include="HttpProxyHandler\PACServerHandle.cs" />
+    <Compile Include="HttpProxyHandler\SysProxyHandle.cs" />
+    <Compile Include="HttpProxyHandler\HttpProxyHandle.cs" />
     <Compile Include="Mode\EMove.cs" />
     <Compile Include="Mode\SysproxyConfig.cs" />
     <Compile Include="StringEx.cs">
@@ -127,7 +127,6 @@
     <Compile Include="Mode\VmessQRCode.cs" />
     <Compile Include="Mode\V2rayTcpRequest.cs" />
     <Compile Include="Handler\ConfigHandler.cs" />
-    <Compile Include="Handler\ProxySetting.cs" />
     <Compile Include="Handler\V2rayHandler.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>

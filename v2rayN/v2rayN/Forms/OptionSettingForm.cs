@@ -18,6 +18,8 @@ namespace v2rayN.Forms
             InitRouting();
 
             InitKCP();
+
+            InitGUI();
         }
 
         /// <summary>
@@ -51,17 +53,6 @@ namespace v2rayN.Forms
                 }
                 chkAllowIn2State();
             }
-
-            //开机自动启动
-            chkAutoRun.Checked = Utils.IsAutoRun();
-
-            //自动从网络同步本地时间
-            chkAutoSyncTime.Checked = config.autoSyncTime;
-
-            //启用系统代理 
-            chksysAgentEnabled.Checked = config.sysAgentEnabled;
-
-            txtPACPort.Text = config.pacPort.ToString();
         }
 
         /// <summary>
@@ -92,6 +83,22 @@ namespace v2rayN.Forms
             chkKcpcongestion.Checked = config.kcpItem.congestion;
         }
 
+        /// <summary>
+        /// 初始化v2rayN GUI设置
+        /// </summary>
+        private void InitGUI()
+        {
+            //开机自动启动
+            chkAutoRun.Checked = Utils.IsAutoRun();
+
+            //自动从网络同步本地时间
+            chkAutoSyncTime.Checked = config.autoSyncTime;
+
+            //自定义GFWList
+            txturlGFWList.Text = config.urlGFWList;
+
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (SaveBase() != 0)
@@ -105,6 +112,11 @@ namespace v2rayN.Forms
             }
 
             if (SaveKCP() != 0)
+            {
+                return;
+            }
+
+            if (SaveGUI() != 0)
             {
                 return;
             }
@@ -127,14 +139,14 @@ namespace v2rayN.Forms
         {
             //日志
             bool logEnabled = chklogEnabled.Checked;
-            string loglevel = cmbloglevel.Text;
+            string loglevel = cmbloglevel.Text.Trim();
 
             //Mux
             bool muxEnabled = chkmuxEnabled.Checked;
 
             //本地监听
-            string localPort = txtlocalPort.Text;
-            string protocol = cmbprotocol.Text;
+            string localPort = txtlocalPort.Text.Trim();
+            string protocol = cmbprotocol.Text.Trim();
             bool udpEnabled = chkudpEnabled.Checked;
             if (Utils.IsNullOrEmpty(localPort) || !Utils.IsNumberic(localPort))
             {
@@ -151,8 +163,8 @@ namespace v2rayN.Forms
             config.inbound[0].udpEnabled = udpEnabled;
 
             //本地监听2
-            string localPort2 = txtlocalPort2.Text;
-            string protocol2 = cmbprotocol2.Text;
+            string localPort2 = txtlocalPort2.Text.Trim();
+            string protocol2 = cmbprotocol2.Text.Trim();
             bool udpEnabled2 = chkudpEnabled2.Checked;
             if (chkAllowIn2.Checked)
             {
@@ -189,22 +201,6 @@ namespace v2rayN.Forms
             //Mux
             config.muxEnabled = muxEnabled;
 
-            //开机自动启动
-            Utils.SetAutoRun(chkAutoRun.Checked);
-
-            //自动从网络同步本地时间
-            config.autoSyncTime = chkAutoSyncTime.Checked;
-
-            //启用系统代理 
-            config.sysAgentEnabled = chksysAgentEnabled.Checked;
-
-            if (Utils.IsNullOrEmpty(txtPACPort.Text) || !Utils.IsNumberic(txtPACPort.Text))
-            {
-                UI.Show("请填写PAC监听端口");
-                return -1;
-            }
-            config.pacPort = Convert.ToInt32(txtPACPort.Text);
-
             return 0;
         }
 
@@ -218,9 +214,9 @@ namespace v2rayN.Forms
             bool bypassChinasites = chkBypassChinasites.Checked;
             bool bypassChinaip = chkBypassChinaip.Checked;
 
-            string useragent = txtUseragent.Text;
-            string userdirect = txtUserdirect.Text;
-            string userblock = txtUserblock.Text;
+            string useragent = txtUseragent.Text.Trim();
+            string userdirect = txtUserdirect.Text.Trim();
+            string userblock = txtUserblock.Text.Trim();
 
             config.chinasites = bypassChinasites;
             config.chinaip = bypassChinaip;
@@ -238,12 +234,12 @@ namespace v2rayN.Forms
         /// <returns></returns>
         private int SaveKCP()
         {
-            string mtu = txtKcpmtu.Text;
-            string tti = txtKcptti.Text;
-            string uplinkCapacity = txtKcpuplinkCapacity.Text;
-            string downlinkCapacity = txtKcpdownlinkCapacity.Text;
-            string readBufferSize = txtKcpreadBufferSize.Text;
-            string writeBufferSize = txtKcpwriteBufferSize.Text;
+            string mtu = txtKcpmtu.Text.Trim();
+            string tti = txtKcptti.Text.Trim();
+            string uplinkCapacity = txtKcpuplinkCapacity.Text.Trim();
+            string downlinkCapacity = txtKcpdownlinkCapacity.Text.Trim();
+            string readBufferSize = txtKcpreadBufferSize.Text.Trim();
+            string writeBufferSize = txtKcpwriteBufferSize.Text.Trim();
             bool congestion = chkKcpcongestion.Checked;
 
             if (Utils.IsNullOrEmpty(mtu) || !Utils.IsNumberic(mtu)
@@ -263,6 +259,24 @@ namespace v2rayN.Forms
             config.kcpItem.readBufferSize = Convert.ToInt32(readBufferSize);
             config.kcpItem.writeBufferSize = Convert.ToInt32(writeBufferSize);
             config.kcpItem.congestion = congestion;
+
+            return 0;
+        }
+
+        /// <summary>
+        /// 保存GUI设置
+        /// </summary>
+        /// <returns></returns>
+        private int SaveGUI()
+        {
+            //开机自动启动
+            Utils.SetAutoRun(chkAutoRun.Checked);
+
+            //自动从网络同步本地时间
+            config.autoSyncTime = chkAutoSyncTime.Checked;
+            
+            //自定义GFWList
+            config.urlGFWList = txturlGFWList.Text.Trim();
 
             return 0;
         }

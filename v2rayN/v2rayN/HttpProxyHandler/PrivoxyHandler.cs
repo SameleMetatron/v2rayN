@@ -2,16 +2,16 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
-using v2rayN.Mode;
 using v2rayN.Properties;
 using v2rayN.Tool;
 
-namespace v2rayN.Handler
+namespace v2rayN.HttpProxyHandler
 {
+    /// <summary>
+    /// Privoxy处理类，提供http协议代理
+    /// </summary>
     class PrivoxyHandler
     {
         /// <summary>
@@ -45,7 +45,7 @@ namespace v2rayN.Handler
 
         private PrivoxyHandler()
         {
-            
+
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace v2rayN.Handler
             }
         }
 
-        public void Start(string localPort)
+        public void Start(int localPort)
         {
             if (_process == null)
             {
@@ -89,8 +89,8 @@ namespace v2rayN.Handler
                     KillProcess(p);
                 }
                 string privoxyConfig = Resources.privoxy_conf;
-                _runningPort = GetFreePort(Convert.ToInt32(localPort));
-                privoxyConfig = privoxyConfig.Replace("__SOCKS_PORT__", localPort);
+                _runningPort = GetFreePort(localPort);
+                privoxyConfig = privoxyConfig.Replace("__SOCKS_PORT__", localPort.ToString());
                 privoxyConfig = privoxyConfig.Replace("__PRIVOXY_BIND_PORT__", _runningPort.ToString());
                 privoxyConfig = privoxyConfig.Replace("__PRIVOXY_BIND_IP__", "0.0.0.0");
                 FileManager.ByteArrayToFile(Utils.GetTempPath(_uniqueConfigFile), Encoding.UTF8.GetBytes(privoxyConfig));
@@ -193,7 +193,7 @@ namespace v2rayN.Handler
                 //var port = ((IPEndPoint)l.LocalEndpoint).Port;
                 //l.Stop();
                 //return port;
-                return localPort + 1000;
+                return localPort + 1;
             }
             catch (Exception e)
             {

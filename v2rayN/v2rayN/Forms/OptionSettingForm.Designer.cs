@@ -32,12 +32,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.txtPACPort = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.chksysAgentEnabled = new System.Windows.Forms.CheckBox();
-            this.chkAutoSyncTime = new System.Windows.Forms.CheckBox();
-            this.chkAutoRun = new System.Windows.Forms.CheckBox();
             this.chkmuxEnabled = new System.Windows.Forms.CheckBox();
             this.chkAllowIn2 = new System.Windows.Forms.CheckBox();
             this.chkudpEnabled2 = new System.Windows.Forms.CheckBox();
@@ -78,6 +72,12 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtKcpmtu = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.txturlGFWList = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.chkAutoSyncTime = new System.Windows.Forms.CheckBox();
+            this.chkAutoRun = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnOK = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -91,6 +91,7 @@
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.tabPage7.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -110,6 +111,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 10);
             this.tabControl1.Name = "tabControl1";
@@ -125,17 +127,11 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(520, 470);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "  基础设置  ";
+            this.tabPage1.Text = "  Core:基础设置  ";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.txtPACPort);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.chksysAgentEnabled);
-            this.groupBox1.Controls.Add(this.chkAutoSyncTime);
-            this.groupBox1.Controls.Add(this.chkAutoRun);
             this.groupBox1.Controls.Add(this.chkmuxEnabled);
             this.groupBox1.Controls.Add(this.chkAllowIn2);
             this.groupBox1.Controls.Add(this.chkudpEnabled2);
@@ -157,68 +153,10 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.ForeColor = System.Drawing.Color.Brown;
-            this.label14.Location = new System.Drawing.Point(217, 93);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(239, 12);
-            this.label14.TabIndex = 27;
-            this.label14.Text = "需要启用系统代理,优先级:PAC > V2ray路由";
-            // 
-            // txtPACPort
-            // 
-            this.txtPACPort.Location = new System.Drawing.Point(124, 89);
-            this.txtPACPort.Name = "txtPACPort";
-            this.txtPACPort.Size = new System.Drawing.Size(78, 21);
-            this.txtPACPort.TabIndex = 25;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(38, 93);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(71, 12);
-            this.label12.TabIndex = 24;
-            this.label12.Text = "PAC监听端口";
-            // 
-            // chksysAgentEnabled
-            // 
-            this.chksysAgentEnabled.AutoSize = true;
-            this.chksysAgentEnabled.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chksysAgentEnabled.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chksysAgentEnabled.Location = new System.Drawing.Point(13, 62);
-            this.chksysAgentEnabled.Name = "chksysAgentEnabled";
-            this.chksysAgentEnabled.Size = new System.Drawing.Size(303, 16);
-            this.chksysAgentEnabled.TabIndex = 23;
-            this.chksysAgentEnabled.Text = "启用系统代理(privoxy,http端口=socks+1000)";
-            this.chksysAgentEnabled.UseVisualStyleBackColor = true;
-            // 
-            // chkAutoSyncTime
-            // 
-            this.chkAutoSyncTime.AutoSize = true;
-            this.chkAutoSyncTime.Location = new System.Drawing.Point(13, 277);
-            this.chkAutoSyncTime.Name = "chkAutoSyncTime";
-            this.chkAutoSyncTime.Size = new System.Drawing.Size(276, 16);
-            this.chkAutoSyncTime.TabIndex = 22;
-            this.chkAutoSyncTime.Text = "启动时自动从网络同步本地时间(可能会不成功)";
-            this.chkAutoSyncTime.UseVisualStyleBackColor = true;
-            // 
-            // chkAutoRun
-            // 
-            this.chkAutoRun.AutoSize = true;
-            this.chkAutoRun.Location = new System.Drawing.Point(13, 250);
-            this.chkAutoRun.Name = "chkAutoRun";
-            this.chkAutoRun.Size = new System.Drawing.Size(180, 16);
-            this.chkAutoRun.TabIndex = 21;
-            this.chkAutoRun.Text = "开机自动启动(可能会不成功)";
-            this.chkAutoRun.UseVisualStyleBackColor = true;
-            // 
             // chkmuxEnabled
             // 
             this.chkmuxEnabled.AutoSize = true;
-            this.chkmuxEnabled.Location = new System.Drawing.Point(13, 188);
+            this.chkmuxEnabled.Location = new System.Drawing.Point(15, 93);
             this.chkmuxEnabled.Name = "chkmuxEnabled";
             this.chkmuxEnabled.Size = new System.Drawing.Size(174, 16);
             this.chkmuxEnabled.TabIndex = 20;
@@ -228,11 +166,11 @@
             // chkAllowIn2
             // 
             this.chkAllowIn2.AutoSize = true;
-            this.chkAllowIn2.Location = new System.Drawing.Point(25, 407);
+            this.chkAllowIn2.Location = new System.Drawing.Point(15, 63);
             this.chkAllowIn2.Name = "chkAllowIn2";
-            this.chkAllowIn2.Size = new System.Drawing.Size(126, 16);
+            this.chkAllowIn2.Size = new System.Drawing.Size(102, 16);
             this.chkAllowIn2.TabIndex = 19;
-            this.chkAllowIn2.Text = "废弃本地监听端口2";
+            this.chkAllowIn2.Text = "本地监听端口2";
             this.chkAllowIn2.UseVisualStyleBackColor = true;
             this.chkAllowIn2.Visible = false;
             this.chkAllowIn2.CheckedChanged += new System.EventHandler(this.chkAllowIn2_CheckedChanged);
@@ -240,7 +178,7 @@
             // chkudpEnabled2
             // 
             this.chkudpEnabled2.AutoSize = true;
-            this.chkudpEnabled2.Location = new System.Drawing.Point(381, 406);
+            this.chkudpEnabled2.Location = new System.Drawing.Point(369, 62);
             this.chkudpEnabled2.Name = "chkudpEnabled2";
             this.chkudpEnabled2.Size = new System.Drawing.Size(66, 16);
             this.chkudpEnabled2.TabIndex = 18;
@@ -255,7 +193,7 @@
             this.cmbprotocol2.Items.AddRange(new object[] {
             "socks",
             "http"});
-            this.cmbprotocol2.Location = new System.Drawing.Point(269, 404);
+            this.cmbprotocol2.Location = new System.Drawing.Point(257, 60);
             this.cmbprotocol2.Name = "cmbprotocol2";
             this.cmbprotocol2.Size = new System.Drawing.Size(97, 20);
             this.cmbprotocol2.TabIndex = 17;
@@ -264,7 +202,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(229, 408);
+            this.label3.Location = new System.Drawing.Point(217, 64);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 16;
@@ -273,7 +211,7 @@
             // 
             // txtlocalPort2
             // 
-            this.txtlocalPort2.Location = new System.Drawing.Point(136, 404);
+            this.txtlocalPort2.Location = new System.Drawing.Point(124, 60);
             this.txtlocalPort2.Name = "txtlocalPort2";
             this.txtlocalPort2.Size = new System.Drawing.Size(78, 21);
             this.txtlocalPort2.TabIndex = 14;
@@ -314,7 +252,7 @@
             // chklogEnabled
             // 
             this.chklogEnabled.AutoSize = true;
-            this.chklogEnabled.Location = new System.Drawing.Point(13, 219);
+            this.chklogEnabled.Location = new System.Drawing.Point(15, 124);
             this.chklogEnabled.Name = "chklogEnabled";
             this.chklogEnabled.Size = new System.Drawing.Size(156, 16);
             this.chklogEnabled.TabIndex = 9;
@@ -331,7 +269,7 @@
             "warning",
             "error",
             "none"});
-            this.cmbloglevel.Location = new System.Drawing.Point(257, 217);
+            this.cmbloglevel.Location = new System.Drawing.Point(257, 122);
             this.cmbloglevel.Name = "cmbloglevel";
             this.cmbloglevel.Size = new System.Drawing.Size(97, 20);
             this.cmbloglevel.TabIndex = 6;
@@ -339,7 +277,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(193, 221);
+            this.label5.Location = new System.Drawing.Point(193, 126);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 8;
@@ -355,7 +293,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 29);
+            this.label2.Location = new System.Drawing.Point(33, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 12);
             this.label2.TabIndex = 2;
@@ -369,7 +307,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(520, 470);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "  路由设置  ";
+            this.tabPage2.Text = "  Core:路由设置  ";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox2
@@ -510,7 +448,7 @@
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage6.Size = new System.Drawing.Size(520, 470);
             this.tabPage6.TabIndex = 2;
-            this.tabPage6.Text = "  KCP设置  ";
+            this.tabPage6.Text = "  Core:KCP设置  ";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // chkKcpcongestion
@@ -619,6 +557,66 @@
             this.label6.TabIndex = 4;
             this.label6.Text = "mtu";
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.txturlGFWList);
+            this.tabPage7.Controls.Add(this.label13);
+            this.tabPage7.Controls.Add(this.label12);
+            this.tabPage7.Controls.Add(this.chkAutoSyncTime);
+            this.tabPage7.Controls.Add(this.chkAutoRun);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(520, 470);
+            this.tabPage7.TabIndex = 3;
+            this.tabPage7.Text = "  v2rayN设置  ";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // txturlGFWList
+            // 
+            this.txturlGFWList.Location = new System.Drawing.Point(30, 96);
+            this.txturlGFWList.Name = "txturlGFWList";
+            this.txturlGFWList.Size = new System.Drawing.Size(468, 21);
+            this.txturlGFWList.TabIndex = 28;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(30, 75);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(227, 12);
+            this.label13.TabIndex = 27;
+            this.label13.Text = "自定义GFWList地址(不需自定义请填空白)";
+            // 
+            // label12
+            // 
+            this.label12.ForeColor = System.Drawing.Color.Brown;
+            this.label12.Location = new System.Drawing.Point(28, 152);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(375, 42);
+            this.label12.TabIndex = 25;
+            this.label12.Text = "*启用系统代理:\r\n全局模式:端口=socks端口+1\r\nPAC 模式:端口=socks端口+2;优先级PAC > v2ray路由";
+            // 
+            // chkAutoSyncTime
+            // 
+            this.chkAutoSyncTime.AutoSize = true;
+            this.chkAutoSyncTime.Location = new System.Drawing.Point(15, 43);
+            this.chkAutoSyncTime.Name = "chkAutoSyncTime";
+            this.chkAutoSyncTime.Size = new System.Drawing.Size(276, 16);
+            this.chkAutoSyncTime.TabIndex = 24;
+            this.chkAutoSyncTime.Text = "启动时自动从网络同步本地时间(可能会不成功)";
+            this.chkAutoSyncTime.UseVisualStyleBackColor = true;
+            // 
+            // chkAutoRun
+            // 
+            this.chkAutoRun.AutoSize = true;
+            this.chkAutoRun.Location = new System.Drawing.Point(15, 16);
+            this.chkAutoRun.Name = "chkAutoRun";
+            this.chkAutoRun.Size = new System.Drawing.Size(180, 16);
+            this.chkAutoRun.TabIndex = 23;
+            this.chkAutoRun.Text = "开机自动启动(可能会不成功)";
+            this.chkAutoRun.UseVisualStyleBackColor = true;
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.btnClose);
@@ -677,6 +675,8 @@
             this.tabPage5.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -709,7 +709,6 @@
         private System.Windows.Forms.CheckBox chkudpEnabled2;
         private System.Windows.Forms.CheckBox chkAllowIn2;
         private System.Windows.Forms.CheckBox chkmuxEnabled;
-        private System.Windows.Forms.CheckBox chkAutoRun;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
@@ -718,8 +717,6 @@
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TextBox txtUserdirect;
         private System.Windows.Forms.TextBox txtUserblock;
-        private System.Windows.Forms.CheckBox chkAutoSyncTime;
-        private System.Windows.Forms.CheckBox chksysAgentEnabled;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.TextBox txtKcpmtu;
         private System.Windows.Forms.Label label6;
@@ -734,8 +731,11 @@
         private System.Windows.Forms.TextBox txtKcpuplinkCapacity;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox chkKcpcongestion;
-        private System.Windows.Forms.TextBox txtPACPort;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.CheckBox chkAutoSyncTime;
+        private System.Windows.Forms.CheckBox chkAutoRun;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txturlGFWList;
     }
 }

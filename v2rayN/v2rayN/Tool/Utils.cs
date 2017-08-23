@@ -5,15 +5,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using v2rayN.Handler;
-using v2rayN.Mode;
 
 namespace v2rayN
 {
@@ -470,7 +467,7 @@ namespace v2rayN
             string strData = string.Empty;
             try
             {
-                IDataObject data = Clipboard.GetDataObject();
+                IDataObject data = Clipboard.GetDataObject();             
                 if (data.GetDataPresent(DataFormats.Text))
                 {
                     strData = data.GetData(DataFormats.Text).ToString();
@@ -481,6 +478,21 @@ namespace v2rayN
             {
             }
             return strData;
+        }
+
+        /// <summary>
+        /// 拷贝至剪贴板
+        /// </summary>
+        /// <returns></returns>
+        public static void SetClipboardData(string strData)
+        {
+            try
+            {
+                Clipboard.SetText(strData);            
+            }
+            catch
+            {
+            }
         }
 
         /// <summary>
@@ -498,26 +510,7 @@ namespace v2rayN
             }
             return string.Empty;
         }
-
-        /// <summary>
-        /// 获取http代理端口号
-        /// </summary>
-        /// <param name="config"></param>
-        /// <returns></returns>
-        public static int GetHttpPortNum(Config config)
-        {
-            //var httpProxy = config.inbound.FirstOrDefault(x => x.protocol == "http");
-            //if (httpProxy != null)
-            //{
-            //    return httpProxy.localPort;
-            //}
-            if (PrivoxyHandler.Instance.IsRunning)
-            {
-                return PrivoxyHandler.Instance.RunningPort;
-            }
-            return -1;
-        }
-
+        
         #endregion
 
         #region TempPath

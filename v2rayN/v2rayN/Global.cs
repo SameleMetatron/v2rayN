@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace v2rayN
 {
     class Global
@@ -88,8 +84,6 @@ namespace v2rayN
         /// </summary>
         public const string vmessProtocol = "vmess://";
 
-
-
         #endregion
 
         #region 全局变量
@@ -100,9 +94,26 @@ namespace v2rayN
         public static bool reloadV2ray { get; set; }
 
         /// <summary>
-        /// 是否开启全局代理
+        /// 是否开启全局代理(http)
         /// </summary>
-        public static bool setSysAgent { get; set; }
+        public static bool sysAgent { get; set; }
+        
+        /// <summary>
+        /// socks端口号
+        /// </summary>
+        public static int socksPort { get; set; }
+
+        /// <summary>
+        /// 全局代理端口(http)
+        /// </summary>
+        public static int sysAgentPort { get; set; }
+
+        /// <summary>
+        /// PAC监听端口号
+        /// </summary>
+        public static int pacPort { get; set; }
+
+
         #endregion
 
 

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
@@ -9,8 +7,11 @@ using v2rayN.Mode;
 using v2rayN.Properties;
 using v2rayN.Tool;
 
-namespace v2rayN.Handler
+namespace v2rayN.HttpProxyHandler
 {
+    /// <summary>
+    /// 提供PAC功能支持
+    /// </summary>
     class PACServerHandle
     {
         public const string PAC_FILE = "pac.txt";
@@ -20,7 +21,7 @@ namespace v2rayN.Handler
         public static void Init(Config config)
         {
             pacLinstener = new HttpListener(); //创建监听实例  
-            pacLinstener.Prefixes.Add(string.Format("http://127.0.0.1:{0}/pac/", config.pacPort)); //添加监听地址 注意是以/结尾。  
+            pacLinstener.Prefixes.Add(string.Format("http://127.0.0.1:{0}/pac/", Global.pacPort)); //添加监听地址 注意是以/结尾。  
             pacLinstener.Start(); //允许该监听地址接受请求的传入。  
             Thread threadpacLinstener = new Thread(new ParameterizedThreadStart(GetPacList)); //创建开启一个线程监听该地址得请求  
             threadpacLinstener.IsBackground = true;
@@ -40,8 +41,8 @@ namespace v2rayN.Handler
         private static void GetPacList(object config)
         {
             var cfg = config as Config;
-            var port = Utils.GetHttpPortNum(cfg);
-            if (port == -1)
+            var port = Global.sysAgentPort;
+            if (port <= 0)
             {
                 return;
             }

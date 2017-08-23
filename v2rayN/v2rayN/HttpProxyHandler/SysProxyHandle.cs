@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using v2rayN.Mode;
 using v2rayN.Properties;
 using v2rayN.Tool;
 
-namespace v2rayN.Handler
+namespace v2rayN.HttpProxyHandler
 {
     class SysProxyHandle
     {
@@ -44,7 +42,7 @@ namespace v2rayN.Handler
             }
             catch (IOException e)
             {
-                
+
             }
         }
 
@@ -132,7 +130,7 @@ namespace v2rayN.Handler
         {
             try
             {
-                using (StreamWriter sw = new StreamWriter(File.Open(_userWininetConfigFile, FileMode.Create)))
+                using (StreamWriter sw = new StreamWriter(File.Open(Utils.GetPath(_userWininetConfigFile), FileMode.Create)))
                 {
                     string jsonString = JsonConvert.SerializeObject(_userSettings, Formatting.Indented);
                     sw.Write(jsonString);
@@ -149,7 +147,7 @@ namespace v2rayN.Handler
         {
             try
             {
-                string configContent = File.ReadAllText(_userWininetConfigFile);
+                string configContent = File.ReadAllText(Utils.GetPath(_userWininetConfigFile));
                 _userSettings = JsonConvert.DeserializeObject<SysproxyConfig>(configContent);
             }
             catch (Exception)

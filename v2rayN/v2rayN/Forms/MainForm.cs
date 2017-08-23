@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
 using System.Windows.Forms;
 using v2rayN.Handler;
+using v2rayN.HttpProxyHandler;
 using v2rayN.Mode;
 
 namespace v2rayN.Forms
@@ -23,22 +20,6 @@ namespace v2rayN.Forms
             this.ShowInTaskbar = false;
             this.WindowState = FormWindowState.Minimized;
             this.Text = Utils.GetVersion();
-            pacListHandle = new PACListHandle();
-            pacListHandle.UpdateCompleted += (sender, args) =>
-            {
-                if (args.Success)
-                {
-                    v2rayHandler_ProcessEvent(false, "PAC更新成功！");
-                }
-                else
-                {
-                    v2rayHandler_ProcessEvent(false, "PAC更新失败！");
-                }
-            };
-            pacListHandle.Error += (sender, args) =>
-            {
-                v2rayHandler_ProcessEvent(true, args.GetException().Message);
-            };
 
             Application.ApplicationExit += (sender, args) =>
             {
@@ -51,6 +32,23 @@ namespace v2rayN.Forms
             ConfigHandler.LoadConfig(ref config);
             v2rayHandler = new V2rayHandler();
             v2rayHandler.ProcessEvent += v2rayHandler_ProcessEvent;
+
+            pacListHandle = new PACListHandle();
+            pacListHandle.UpdateCompleted += (sender2, args) =>
+            {
+                if (args.Success)
+                {
+                    v2rayHandler_ProcessEvent(false, "PAC更新成功！");
+                }
+                else
+                {
+                    v2rayHandler_ProcessEvent(false, "PAC更新失败！");
+                }
+            };
+            pacListHandle.Error += (sender2, args) =>
+            {
+                v2rayHandler_ProcessEvent(true, args.GetException().Message);
+            };
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -65,8 +63,6 @@ namespace v2rayN.Forms
             {
                 CDateTime.SetLocalTime();
             }
-
-            ChangePACButtonStatus(config.listenerType);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -187,7 +183,7 @@ namespace v2rayN.Forms
         {
             try
             {
-                ToolStripItem ts = (ToolStripItem) sender;
+                ToolStripItem ts = (ToolStripItem)sender;
                 int index = Convert.ToInt32(ts.Tag);
                 SetDefaultServer(index);
             }
@@ -211,6 +207,8 @@ namespace v2rayN.Forms
             }
             v2rayHandler.LoadV2ray(config);
             Global.reloadV2ray = false;
+
+            ChangeSysAgent(config.sysAgentEnabled);
         }
 
         /// <summary>
@@ -219,6 +217,8 @@ namespace v2rayN.Forms
         private void CloseV2ray()
         {
             ConfigHandler.ToJsonFile(config);
+
+            ChangeSysAgent(false);
 
             v2rayHandler.V2rayStop();
         }
@@ -485,7 +485,7 @@ namespace v2rayN.Forms
         {
             if (this.txtMsgBox.InvokeRequired)
             {
-                Invoke(new AppendTextDelegate(AppendText), new object[] {text});
+                Invoke(new AppendTextDelegate(AppendText), new object[] { text });
             }
             else
             {
@@ -535,11 +535,6 @@ namespace v2rayN.Forms
             {
                 ShowForm();
             }
-        }
-
-        private void menuOpenMain_Click(object sender, EventArgs e)
-        {
-            ShowForm();
         }
 
         private void menuExit_Click(object sender, EventArgs e)
@@ -655,9 +650,22 @@ namespace v2rayN.Forms
 
         #region PAC相关
 
+
         private void menuUpdatePACList_Click(object sender, EventArgs e)
         {
             pacListHandle.UpdatePACFromGFWList(config);
+        }
+
+        private void menuCopyPACUrl_Click(object sender, EventArgs e)
+        {
+            Utils.SetClipboardData(HttpProxyHandle.GetPacUrl());
+        }
+
+        private void menuSysAgentEnabled_Click(object sender, EventArgs e)
+        {
+            bool isChecked = !config.sysAgentEnabled;
+            config.sysAgentEnabled = isChecked;
+            ChangeSysAgent(isChecked);
         }
 
         private void menuGlobal_Click(object sender, EventArgs e)
@@ -680,7 +688,7 @@ namespace v2rayN.Forms
 
         private void ChangePACButtonStatus(int type)
         {
-            if (SystemProxyHandle.Update(config, false))
+            if (HttpProxyHandle.Update(config, false))
             {
                 switch (type)
                 {
@@ -701,9 +709,31 @@ namespace v2rayN.Forms
                         break;
                 }
             }
-            
+
         }
 
+        /// <summary>
+        /// 改变系统代理
+        /// </summary>
+        /// <param name="isChecked"></param>
+        private void ChangeSysAgent(bool isChecked)
+        {
+            if (isChecked)
+            {
+                if (HttpProxyHandle.RestartHttpAgent(config, false))
+                {
+                    ChangePACButtonStatus(config.listenerType);
+                }
+            }
+            else
+            {
+                HttpProxyHandle.Update(config, true);
+                HttpProxyHandle.CloseHttpAgent(config);
+            }
+
+            menuSysAgentEnabled.Checked =
+            menuSysAgentMode.Enabled = isChecked;
+        }
         #endregion
 
 
